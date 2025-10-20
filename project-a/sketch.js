@@ -64,7 +64,7 @@ function draw() {
   //moon
   fill(0, 0, 100, 75);
   stroke(0, 0, 100, 20);
-  strokeWeight(2);
+  strokeWeight(2.0);
   x = 100 + cos(frameCount*0.0005) * 600;
   y = -50 + sin(frameCount*0.0005) * 600;
   arc(x, y, 65, 65, -PI/3, 2*PI/3);
