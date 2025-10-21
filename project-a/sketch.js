@@ -41,7 +41,7 @@ function draw() {
   
   //water surface
    for(let y = 0; y < height; y += rectSize){
-    let h = map(y, 0, width, 56, 67);
+    let h = map(y, 0, width, 63, 54);
     sb = map(sin(frameCount*0.01), -1, 1, 55, 65);
     bb = map(sin(frameCount*0.01), -1, 1, 56, 68);
     let op = map(sin(frameCount*0.1), -1, 1, 0, 95);
