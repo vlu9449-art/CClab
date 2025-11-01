@@ -50,7 +50,6 @@ class VioletTorch {
     translate(this.x, this.y);
 
     // ⬇️ draw your dancer from here ⬇️
-    let t = (frameCount * 0.5) % 60;
     let cycle = 500;
     let flashFrames = 200;
 
