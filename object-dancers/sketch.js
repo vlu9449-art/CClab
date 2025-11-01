@@ -61,7 +61,7 @@ class VioletTorch {
     }
 
 
-    //circles
+    //background small flames
     if ((frameCount % cycle) < flashFrames) {
       for (let R = 60; R < 100; R += 30) {
         for (let angle = -PI / 9; angle <= 8 * PI / 7; angle += PI / 5) {
