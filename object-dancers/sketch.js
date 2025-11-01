@@ -38,8 +38,8 @@ class VioletTorch {
     this.y = startY;
   }
   update() {
-    this.x = width / 2 + 20 * cos(frameCount * 0.05);
-    this.y = height / 2 + 15 + 30 * sin(frameCount * 0.1);
+    this.x = width / 2 + 20 * cos(frameCount * 0.08);
+    this.y = height / 2 + 15 + 30 * sin(frameCount * 0.16);
   }
 
   display() {
@@ -57,40 +57,80 @@ class VioletTorch {
     // smooth ramp during the flash window
     let flashMix = 0;
     if ((frameCount % cycle) < flashFrames) {
-      flashMix = (frameCount % cycle) / (flashFrames - 1);
-      // 0 -> 1 across the flash
+      flashMix = sin(((frameCount % cycle) / flashFrames) * PI);
+      //ease in/out
+    }
+
+
+    //circles
+    if ((frameCount % cycle) < flashFrames) {
+      for (let R = 60; R < 100; R += 30) {
+        for (let angle = -PI / 9; angle <= 8 * PI / 7; angle += PI / 5) {
+          fill(255, 255, 255, 180);
+          let x = map(cos(angle), -1, 1, -R, R);
+          let y = map(cos(R * sin(angle)), -1, 1, -5 - R, 5 + R);
+          let s = map(sin(frameCount * 0.3), 0, 2 * PI, 5, 20);
+          circle(x, y, s);
+        }
+      }
     }
 
     // size boost for flames while flashing
-    let flameScale = map(sin(frameCount * 0.05), -1, 1, 1, 1 + 1.5 * flashMix);
+    let flameScale = map(sin(frameCount * 0.05), -1, 1, 1, 1 + 2.7 * flashMix);
 
-    fill(143, 0, 255);
+    //normal torch body
+    let n_yb = 80;
+    let n_xtl = map(cos(frameCount * 0.12), -1, 1, -8, -11);
+    let n_xtr = map(cos(frameCount * 0.12), -1, 1, 8, 11);
+    let n_yt = map(cos(frameCount * 0.16), -1, 1, 22, 42);
+
+    let n_xr = map(cos(frameCount * 0.12), -1, 1, -12, -15);
+    let n_yr = map(cos(frameCount * 0.16), -1, 1, 8, 28);
+    let n_w = map(cos(frameCount * 0.12), -1, 1, 24, 30);
+    let n_l = map(cos(frameCount * 0.12), -1, 1, 6, 5.5);
+
+    //expanded torch body
+    let e_yb = 90;
+    let e_xtl = -15;
+    let e_xtr = 15;
+    let e_yt = 18;
+    let e_xr = -20;
+    let e_yr = 3;
+    let e_w = 40;
+    let e_l = 8;
+
+    //draw torch body
+    let baseBodyCol = color(143, 0, 255);
+    let whiteCol = color(255);
+    let bodyCol = lerpColor(baseBodyCol, whiteCol, 0.8);
+
+    fill(baseBodyCol);
     stroke(255);
     strokeWeight(0.3);
-
-    let xtl = map(cos(frameCount * 0.06), -1, 1, -8, -11);
-    let xtr = map(cos(frameCount * 0.06), -1, 1, 8, 11);
-    let yt = map(cos(frameCount * 0.1), -1, 1, 22, 42);
-    triangle(0, 80, xtr, yt, xtl, yt);
-
-    let xr = map(cos(frameCount * 0.06), -1, 1, -12, -15);
-    let yr = map(cos(frameCount * 0.1), -1, 1, 8, 28);
-    let w = map(cos(frameCount * 0.06), -1, 1, 24, 30);
-    let l = map(cos(frameCount * 0.06), -1, 1, 6, 5.5);
-    rect(xr, yr, w, l);
+    triangle(0, n_yb, n_xtr, n_yt, n_xtl, n_yt);
+    rect(n_xr, n_yr, n_w, n_l);
 
     if (frameCount % cycle < flashFrames) {
-      xtl = -15;
-      xtr = 15;
-      yt = 18;
-      xr = -20;
-      yr = 4;
-      w = 40;
-      l = 8;
-      triangle(0, 80, xtr, yt, xtl, yt);
-      rect(xr, yr, w, l);
+      fill(bodyCol);
+      stroke(255);
+      strokeWeight(1);
+      triangle(0, e_yb, e_xtr, e_yt, e_xtl, e_yt);
+      rect(e_xr, e_yr, e_w, e_l);
     }
 
+    //arms & hands
+    if ((frameCount % cycle) < flashFrames) {
+      let x1 = map(cos(frameCount * 0.12), -1, 1, -40, -10);
+      let y1 = map(sin(frameCount * 0.12), -1, 1, 20, 60);
+      fill(255, 205, 205, 230);
+      line(-10, 18, x1, y1);
+      circle(x1, y1, 25);
+      let x2 = map(sin(frameCount * 0.18), -1, 1, 10, 40);
+      let y2 = map(cos(frameCount * 0.18), -1, 1, 20, 60);
+      fill(255, 205, 205, 230);
+      line(10, 18, x2, y2);
+      circle(x2, y2, 25);
+    }
 
     //flames
     // color blend: purple base -> hot orange when flashing
@@ -105,7 +145,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 28) * flameScale;
       let y = map(i, 0, 100, 50, 0);
-      let x = 25 * sin(frameCount * 0.05 + i * 0.02);
+      let x = 25 * sin(frameCount * 0.1 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 60, 10);
       }
@@ -114,7 +154,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 4, 28) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = 10 + 23 * sin(frameCount * 0.05 + i * 0.02);
+      let x = 10 + 23 * sin(frameCount * 0.1 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
@@ -123,7 +163,16 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 28) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = 18 * sin(frameCount * 0.05 + i * 0.02);
+      let x = 18 * sin(frameCount * 0.1 + i * 0.02);
+      if (frameCount % cycle < flashFrames) {
+        y = map(i, 0, 100, 48, 10);
+      }
+      circle(x, -12 - y, s);
+    }
+    for (let i = 0; i < 100; i++) {
+      let s = map(i, 0, 100, 3, 25) * flameScale;
+      let y = map(i, 0, 100, 38, 0);
+      let x = 20 * sin(frameCount * 0.1 + i * 0.02) - 20;
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
@@ -134,7 +183,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 28) * flameScale;
       let y = map(i, 0, 100, 50, 0);
-      let x = 25 * cos(frameCount * 0.05 + i * 0.02);
+      let x = 25 * cos(frameCount * 0.1 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 60, 10);
       }
@@ -143,7 +192,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 4, 28) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = -10 + 23 * cos(frameCount * 0.05 + i * 0.02);
+      let x = -10 + 23 * cos(frameCount * 0.1 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
@@ -152,31 +201,67 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 28) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = 18 * cos(frameCount * 0.05 + i * 0.02);
+      let x = 18 * cos(frameCount * 0.1 + i * 0.02);
+      if (frameCount % cycle < flashFrames) {
+        y = map(i, 0, 100, 48, 10);
+      }
+      circle(x, -12 - y, s);
+    }
+    for (let i = 0; i < 100; i++) {
+      let s = map(i, 0, 100, 3, 25) * flameScale;
+      let y = map(i, 0, 100, 38, 0);
+      let x = 20 * cos(frameCount * 0.1 + i * 0.02) - 20;
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
       circle(x, -12 - y, s);
     }
 
-    //add
-    for (let i = 0; i < 100; i++) {
-      let s = map(i, 0, 100, 3, 25) * flameScale;
-      let y = map(i, 0, 100, 38, 0);
-      let x = 20 * cos(frameCount * 0.05 + i * 0.02) - 20;
-      if (frameCount % cycle < flashFrames) {
-        y = map(i, 0, 100, 48, 10);
+    //additional dancing flame
+    if ((frameCount % cycle) < flashFrames) {
+      fill(143, 0, 255, 8);
+      noStroke();
+      for (let i = 0; i < 100; i++) {
+        let s = map(i, 0, 100, 2, 12);
+        let y = 15 + map(i, 0, 100, 6, 24);
+        let x = 40 + 2 * sin(frameCount * 0.2 + i * 0.02);
+        circle(x, y, s);
       }
-      circle(x, -12 - y, s);
-    }
-    for (let i = 0; i < 100; i++) {
-      let s = map(i, 0, 100, 3, 25) * flameScale;
-      let y = map(i, 0, 100, 38, 0);
-      let x = 20 * sin(frameCount * 0.05 + i * 0.02) - 20;
-      if (frameCount % cycle < flashFrames) {
-        y = map(i, 0, 100, 48, 10);
+      for (let i = 0; i < 100; i++) {
+        let s = map(i, 0, 100, 2, 10);
+        let y = 15 + map(i, 0, 100, 12, 24);
+        let x = 44 + 2 * sin(frameCount * 0.2 + i * 0.02);
+        circle(x, y, s);
       }
-      circle(x, -12 - y, s);
+      for (let i = 0; i < 100; i++) {
+        let s = map(i, 0, 100, 2, 10);
+        let y = 15 + map(i, 0, 100, 12, 24);
+        let x = 36 + 2 * sin(frameCount * 0.2 + i * 0.02);
+        circle(x, y, s);
+      }
+
+      for (let i = 0; i < 100; i++) {
+        let s = map(i, 0, 100, 4, 15);
+        let y = 60 + map(i, 0, 100, 8, 24);
+        let x = -38 + 4 * sin(frameCount * 0.12 + i * 0.02);
+        circle(x, y, s);
+      }
+      for (let i = 0; i < 100; i++) {
+        let s = map(i, 0, 100, 4, 12);
+        let y = 60 + map(i, 0, 100, 12, 24);
+        let x = -40 + 4 * sin(frameCount * 0.12 + i * 0.02);
+        circle(x, y, s);
+      }
+      for (let i = 0; i < 100; i++) {
+        let s = map(i, 0, 100, 4, 12);
+        let y = 60 + map(i, 0, 100, 12, 24);
+        let x = -33 + 4 * sin(frameCount * 0.12 + i * 0.02);
+        circle(x, y, s);
+      }
+
+      // let x = -30 + 15 * sin(frameCount * 0.05);
+      // let y = 15 + 30 * cos(frameCount * 0.05);
+
     }
     // ⬆️ draw your dancer above ⬆️
 
