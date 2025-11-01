@@ -219,51 +219,47 @@ class VioletTorch {
     }
 
     //additional dancing flame
-    if ((frameCount % cycle) < flashFrames) {
-      fill(143, 0, 255, 8);
-      noStroke();
-      for (let i = 0; i < 100; i++) {
-        let s = map(i, 0, 100, 2, 12);
-        let y = 15 + map(i, 0, 100, 6, 24);
-        let x = 40 + 2 * sin(frameCount * 0.2 + i * 0.02);
-        circle(x, y, s);
-      }
-      for (let i = 0; i < 100; i++) {
-        let s = map(i, 0, 100, 2, 10);
-        let y = 15 + map(i, 0, 100, 12, 24);
-        let x = 44 + 2 * sin(frameCount * 0.2 + i * 0.02);
-        circle(x, y, s);
-      }
-      for (let i = 0; i < 100; i++) {
-        let s = map(i, 0, 100, 2, 10);
-        let y = 15 + map(i, 0, 100, 12, 24);
-        let x = 36 + 2 * sin(frameCount * 0.2 + i * 0.02);
-        circle(x, y, s);
-      }
-
-      for (let i = 0; i < 100; i++) {
-        let s = map(i, 0, 100, 4, 15);
-        let y = 60 + map(i, 0, 100, 8, 24);
-        let x = -38 + 4 * sin(frameCount * 0.12 + i * 0.02);
-        circle(x, y, s);
-      }
-      for (let i = 0; i < 100; i++) {
-        let s = map(i, 0, 100, 4, 12);
-        let y = 60 + map(i, 0, 100, 12, 24);
-        let x = -40 + 4 * sin(frameCount * 0.12 + i * 0.02);
-        circle(x, y, s);
-      }
-      for (let i = 0; i < 100; i++) {
-        let s = map(i, 0, 100, 4, 12);
-        let y = 60 + map(i, 0, 100, 12, 24);
-        let x = -33 + 4 * sin(frameCount * 0.12 + i * 0.02);
-        circle(x, y, s);
-      }
-
-      // let x = -30 + 15 * sin(frameCount * 0.05);
-      // let y = 15 + 30 * cos(frameCount * 0.05);
-
+    fill(143, 0, 255, 8);
+    stroke(255, 229, 180, 8);
+    strokeWeight(0.3);
+    for (let i = 0; i < 100; i++) {
+      let s = map(i, 0, 100, 2, 12);
+      let y = 15 + map(i, 0, 100, 6, 24);
+      let x = 40 + 2 * sin(frameCount * 0.2 + i * 0.02);
+      circle(x, y, s);
     }
+    for (let i = 0; i < 100; i++) {
+      let s = map(i, 0, 100, 2, 10);
+      let y = 15 + map(i, 0, 100, 12, 24);
+      let x = 43 + 2 * sin(frameCount * 0.2 + i * 0.02);
+      circle(x, y, s);
+    }
+    for (let i = 0; i < 100; i++) {
+      let s = map(i, 0, 100, 2, 10);
+      let y = 15 + map(i, 0, 100, 12, 24);
+      let x = 37 + 2 * sin(frameCount * 0.2 + i * 0.02);
+      circle(x, y, s);
+    }
+
+    for (let i = 0; i < 100; i++) {
+      let s = map(i, 0, 100, 4, 15);
+      let y = 55 + map(i, 0, 100, 8, 24);
+      let x = -38 + 4 * sin(frameCount * 0.15 + i * 0.02);
+      circle(x, y, s);
+    }
+    for (let i = 0; i < 100; i++) {
+      let s = map(i, 0, 100, 4, 12);
+      let y = 55 + map(i, 0, 100, 12, 24);
+      let x = -40 + 4 * sin(frameCount * 0.15 + i * 0.02);
+      circle(x, y, s);
+    }
+    for (let i = 0; i < 100; i++) {
+      let s = map(i, 0, 100, 4, 12);
+      let y = 55 + map(i, 0, 100, 12, 24);
+      let x = -35 + 4 * sin(frameCount * 0.15 + i * 0.02);
+      circle(x, y, s);
+    }
+
     // ⬆️ draw your dancer above ⬆️
 
 
