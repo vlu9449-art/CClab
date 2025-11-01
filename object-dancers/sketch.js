@@ -11,7 +11,7 @@
 */
 
 let dancer;
-let t;
+
 function setup() {
   // no adjustments in the setup function needed...
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -50,7 +50,7 @@ class VioletTorch {
     translate(this.x, this.y);
 
     // ⬇️ draw your dancer from here ⬇️
-    t = (frameCount * 0.5) % 60;
+    let t = (frameCount * 0.5) % 60;
     let cycle = 500;
     let flashFrames = 200;
 
@@ -66,11 +66,13 @@ class VioletTorch {
     if ((frameCount % cycle) < flashFrames) {
       for (let R = 60; R < 100; R += 30) {
         for (let angle = -PI / 9; angle <= 8 * PI / 7; angle += PI / 5) {
-          fill(255, 255, 255, 180);
+          fill(255, 174, 66, 160);
           let x = map(cos(angle), -1, 1, -R, R);
           let y = map(cos(R * sin(angle)), -1, 1, -5 - R, 5 + R);
           let s = map(sin(frameCount * 0.07), 0, 2 * PI, 5, 20);
-          circle(x, y, s);
+          ellipse(x, y, s - 4, s);
+          ellipse(x - 0.6, y + 0.6, s - 4, s - 0.2);
+          ellipse(x + 0.6, y + 0.6, s - 4, s - 0.2);
         }
       }
     }
