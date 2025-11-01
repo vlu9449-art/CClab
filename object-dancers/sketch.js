@@ -38,8 +38,8 @@ class VioletTorch {
     this.y = startY;
   }
   update() {
-    this.x = width / 2 + 20 * cos(frameCount * 0.08);
-    this.y = height / 2 + 15 + 30 * sin(frameCount * 0.16);
+    this.x = width / 2 + 20 * cos(frameCount * 0.05);
+    this.y = height / 2 + 15 + 30 * sin(frameCount * 0.08);
   }
 
   display() {
@@ -69,7 +69,7 @@ class VioletTorch {
           fill(255, 255, 255, 180);
           let x = map(cos(angle), -1, 1, -R, R);
           let y = map(cos(R * sin(angle)), -1, 1, -5 - R, 5 + R);
-          let s = map(sin(frameCount * 0.3), 0, 2 * PI, 5, 20);
+          let s = map(sin(frameCount * 0.07), 0, 2 * PI, 5, 20);
           circle(x, y, s);
         }
       }
@@ -80,14 +80,14 @@ class VioletTorch {
 
     //normal torch body
     let n_yb = 80;
-    let n_xtl = map(cos(frameCount * 0.12), -1, 1, -8, -11);
-    let n_xtr = map(cos(frameCount * 0.12), -1, 1, 8, 11);
-    let n_yt = map(cos(frameCount * 0.16), -1, 1, 22, 42);
+    let n_xtl = map(cos(frameCount * 0.06), -1, 1, -8, -11);
+    let n_xtr = map(cos(frameCount * 0.06), -1, 1, 8, 11);
+    let n_yt = map(cos(frameCount * 0.08), -1, 1, 22, 42);
 
-    let n_xr = map(cos(frameCount * 0.12), -1, 1, -12, -15);
-    let n_yr = map(cos(frameCount * 0.16), -1, 1, 8, 28);
-    let n_w = map(cos(frameCount * 0.12), -1, 1, 24, 30);
-    let n_l = map(cos(frameCount * 0.12), -1, 1, 6, 5.5);
+    let n_xr = map(cos(frameCount * 0.06), -1, 1, -12, -15);
+    let n_yr = map(cos(frameCount * 0.08), -1, 1, 8, 28);
+    let n_w = map(cos(frameCount * 0.06), -1, 1, 24, 30);
+    let n_l = map(cos(frameCount * 0.06), -1, 1, 6, 5.5);
 
     //expanded torch body
     let e_yb = 90;
@@ -120,13 +120,13 @@ class VioletTorch {
 
     //arms & hands
     if ((frameCount % cycle) < flashFrames) {
-      let x1 = map(cos(frameCount * 0.12), -1, 1, -40, -10);
-      let y1 = map(sin(frameCount * 0.12), -1, 1, 20, 60);
+      let x1 = map(cos(frameCount * 0.1), -1, 1, -40, -10);
+      let y1 = map(sin(frameCount * 0.1), -1, 1, 20, 60);
       fill(255, 205, 205, 230);
       line(-10, 18, x1, y1);
       circle(x1, y1, 25);
-      let x2 = map(sin(frameCount * 0.18), -1, 1, 10, 40);
-      let y2 = map(cos(frameCount * 0.18), -1, 1, 20, 60);
+      let x2 = map(sin(frameCount * 0.12), -1, 1, 10, 40);
+      let y2 = map(cos(frameCount * 0.12), -1, 1, 20, 60);
       fill(255, 205, 205, 230);
       line(10, 18, x2, y2);
       circle(x2, y2, 25);
@@ -145,7 +145,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 28) * flameScale;
       let y = map(i, 0, 100, 50, 0);
-      let x = 25 * sin(frameCount * 0.1 + i * 0.02);
+      let x = 25 * sin(frameCount * 0.06 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 60, 10);
       }
@@ -154,7 +154,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 4, 28) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = 10 + 23 * sin(frameCount * 0.1 + i * 0.02);
+      let x = 10 + 23 * sin(frameCount * 0.06 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
@@ -163,7 +163,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 28) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = 18 * sin(frameCount * 0.1 + i * 0.02);
+      let x = 18 * sin(frameCount * 0.06 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
@@ -172,7 +172,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 25) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = 20 * sin(frameCount * 0.1 + i * 0.02) - 20;
+      let x = 20 * sin(frameCount * 0.06 + i * 0.02) - 20;
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
@@ -183,7 +183,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 28) * flameScale;
       let y = map(i, 0, 100, 50, 0);
-      let x = 25 * cos(frameCount * 0.1 + i * 0.02);
+      let x = 25 * cos(frameCount * 0.06 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 60, 10);
       }
@@ -192,7 +192,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 4, 28) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = -10 + 23 * cos(frameCount * 0.1 + i * 0.02);
+      let x = -10 + 23 * cos(frameCount * 0.06 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
@@ -201,7 +201,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 28) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = 18 * cos(frameCount * 0.1 + i * 0.02);
+      let x = 18 * cos(frameCount * 0.06 + i * 0.02);
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
@@ -210,7 +210,7 @@ class VioletTorch {
     for (let i = 0; i < 100; i++) {
       let s = map(i, 0, 100, 3, 25) * flameScale;
       let y = map(i, 0, 100, 38, 0);
-      let x = 20 * cos(frameCount * 0.1 + i * 0.02) - 20;
+      let x = 20 * cos(frameCount * 0.06 + i * 0.02) - 20;
       if (frameCount % cycle < flashFrames) {
         y = map(i, 0, 100, 48, 10);
       }
