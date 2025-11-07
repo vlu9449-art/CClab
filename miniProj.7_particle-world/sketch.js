@@ -1,10 +1,10 @@
 // CCLab Mini Project - 9.R Particle World Template
 
-let NUM_OF_PARTICLES = 5; // Decide the initial number of particles.
+let NUM_OF_PARTICLES = 10; // Decide the initial number of particles.
 let MAX_OF_PARTICLES = 200; // Decide the maximum number of particles.
 
 let particles = [];
-let n = 50;
+let n = 30;
 function setup() {
   let canvas = createCanvas(800, 500);
   canvas.parent("p5-canvas-container");
@@ -26,11 +26,15 @@ function draw() {
     let p = particles[i];
     p.update();
     p.display();
+
+    if (p.isOut()) {
+      p.splice(i, 1);
+    }
   }
 
   // limit the number of particles
   if (particles.length > MAX_OF_PARTICLES) {
-    particles.splice(0, 1); // remove the first (oldest) particle
+    particles.splice(0, 1); // remove the first (oldest) 
   }
 }
 
@@ -44,15 +48,16 @@ class Particle {
     this.y0 = y;
     this.dia = 30;
   }
+
   // methods (functions): particle's behaviors
   update() {
     // (add) 
   }
+
   display() {
     // particle's appearance
     push();
     translate(this.x, this.y);
-    //circle(0, 0, this.dia);
 
     let h = map(cos(frameCount * 0.05), -1, 1, 10, 70);
     let bs = map(frameCount * 0.02, 0, 100, 70, 100);
@@ -68,13 +73,13 @@ class Particle {
     beginShape();
     for (let i = 0; i < n; i++) {
       //particle
-      let freq = map(frameCount * 0.05, 0, width, 0.1, 0.8);
-      let spikes = map(frameCount * 0.05, 0, height, 1, 10);
+      let freq = map(frameCount * 0.05, 0, width, 0.4, 0.7);
+      let spikes = map(frameCount * 0.08, 0, height, 3, 10);
       let angle = map(i, 0, n, -2 * PI, 2 * PI);
-      let offset = map(i, 0, n, -spikes * PI, spikes * PI);
+      let offset = map(i, 0, n, -spikes * 3 * PI, spikes * 3 * PI);
 
       //spinning speed
-      let sp = map(cos(frameCount * 0.005), 0, 1, 0.05, 0.02);
+      let sp = map(cos(frameCount * 0.01), 0, 1, 0.05, 0.02);
 
       //size & breathing animation of the particle
       let p = this.dia + 2 * sin(frameCount * 0.05);
@@ -87,5 +92,13 @@ class Particle {
     }
     endShape(CLOSE);
     pop();
+  }
+
+  isOut() {
+    if (this.x > width + this.dia || this.x < 0 - this.dia || this.y > height + this.dia || this.y < 0 - this.dia) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
