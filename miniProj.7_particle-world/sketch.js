@@ -1,40 +1,47 @@
 // CCLab Mini Project - 9.R Particle World Template
 
 let NUM_OF_PARTICLES = 10; // Decide the initial number of particles.
-let MAX_OF_PARTICLES = 200; // Decide the maximum number of particles.
+let MAX_OF_PARTICLES = 50; // Decide the maximum number of particles.
 
 let particles = [];
-let n = 30;
+let n = 5;
+let mic;
 function setup() {
   let canvas = createCanvas(800, 500);
   canvas.parent("p5-canvas-container");
   colorMode(HSB, 100);
+  mic = new p5.AudioIn();
+  mic.start();
 
   // generate particles
   for (let i = 0; i < NUM_OF_PARTICLES; i++) {
-    particles[i] = new Particle(random(60, width - 60), random(60, height - 60));
+    particles[i] = new Particle(random(width), random(height));
   }
 }
 
-function draw() {
-  background(30);
+function mousePressed() {
+  particles.push(new Particle(random(width), random(height)));
+}
 
+function draw() {
+  background(62, 60, 25, 2);
   // consider generating particles in draw(), using Dynamic Array
 
   // update and display
   for (let i = 0; i < particles.length; i++) {
     let p = particles[i];
-    p.update();
+
+    if (i % 3 === 0) {
+      p.direction();
+    } else {
+      p.update();
+    }
     p.display();
 
-    if (p.isOut()) {
-      p.splice(i, 1);
+    // limit the number of particles
+    if (particles.length > MAX_OF_PARTICLES) {
+      particles.splice(0, 10); // remove the first (oldest) 
     }
-  }
-
-  // limit the number of particles
-  if (particles.length > MAX_OF_PARTICLES) {
-    particles.splice(0, 1); // remove the first (oldest) 
   }
 }
 
@@ -46,17 +53,26 @@ class Particle {
     this.y = y;
     this.x0 = x;
     this.y0 = y;
-    this.dia = 30;
+    this.dia = random(3, 10);
+    this.angle = radians(frameCount * 0.05);
   }
 
   // methods (functions): particle's behaviors
   update() {
-    // (add) 
+    //voice control the speed
+    let f = map(mic.getLevel(), 0, 1, 0.2, 0.8);
+    this.angle += radians(0.5 * f * PI);
+  }
+
+  direction() {
+    let f = map(mic.getLevel(), 0, 1, 0.2, 0.6);
+    this.angle -= radians(0.5 * f * PI);
   }
 
   display() {
     // particle's appearance
     push();
+    rotate(this.angle);
     translate(this.x, this.y);
 
     let h = map(cos(frameCount * 0.05), -1, 1, 10, 70);
@@ -64,10 +80,10 @@ class Particle {
     let t = map(frameCount * 0.02, 0, 100, 80, 90);
     stroke(h, 20, bs, t);
     strokeWeight(1.5);
-    let c = map(cos(frameCount * 0.01), -1, 1, 0, 100);
+    let c = map(cos(frameCount * 0.03), -1, 1, 0, 100);
     let s = frameCount * 0.01 % 30;
     let b = map(frameCount * 0.1, 0, 100, 60, 90);
-    fill(c, s, b, 20);
+    fill(c, s, b, 80);
 
     //particle
     beginShape();
@@ -82,23 +98,19 @@ class Particle {
       let sp = map(cos(frameCount * 0.01), 0, 1, 0.05, 0.02);
 
       //size & breathing animation of the particle
-      let p = this.dia + 2 * sin(frameCount * 0.05);
-      let r = p + sin(frameCount * freq * sp + offset);
+      let p = this.dia + 0.5 * sin(frameCount * 0.0);
+      let r = p + 0.5 + sin(frameCount * 0.05 * freq * sp + offset);
 
       this.x = this.x0 + r * cos(angle);
       this.y = this.y0 + r * sin(angle);
 
       curveVertex(this.x, this.y);
+
+      //line(this.px, this.py, this.x, this.y);
     }
     endShape(CLOSE);
     pop();
   }
 
-  isOut() {
-    if (this.x > width + this.dia || this.x < 0 - this.dia || this.y > height + this.dia || this.y < 0 - this.dia) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+
 }
