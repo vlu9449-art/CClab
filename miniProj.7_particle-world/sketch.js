@@ -44,7 +44,7 @@ function draw() {
 
     // limit the number of particles
     if (particles.length > MAX_OF_PARTICLES) {
-      particles.splice(0, 5); // remove the first (oldest) 
+      particles.splice(0, 3); // remove the first (oldest) 
     }
   }
 }
