@@ -6,6 +6,7 @@ let MAX_OF_PARTICLES = 50; // Decide the maximum number of particles.
 let particles = [];
 let n = 5;
 let mic;
+let sound1, sound2, sound3;
 function setup() {
   let canvas = createCanvas(800, 500);
   canvas.parent("p5-canvas-container");
@@ -19,12 +20,20 @@ function setup() {
   }
 }
 
-function mousePressed() {
-  particles.push(new Particle(mouseX, mouseY));
+function preload() {
+  sound1 = loadSound("assets/Big Fish.mp3");
+  sound2 = loadSound("assets/Star Fish.mp3");
+  sound3 = loadSound("assets/Fu-Guang.mp3");
 }
 
 function keyPressed() {
-  particles.push(new Particle(random(width), random(height)));
+  if (mouseX < 330 && sound2.isPlaying == false && sound3.isPlaying == flase) {
+    sound1.play();
+  } else if (mouseX > 330 && mouseX < 660 && sound1.isPlaying == false && sound3.isPlaying == flase) {
+    sound2.play();
+  } else if (mouseX > 660 && sound1.isPlaying == false && sound2.isPlaying == flase) {
+    sound3.play();
+  }
 }
 
 function draw() {
