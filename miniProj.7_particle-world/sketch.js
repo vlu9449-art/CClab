@@ -20,6 +20,10 @@ function setup() {
 }
 
 function mousePressed() {
+  particles.push(new Particle(mouseX, mouseY);
+}
+
+function keyPressed() {
   particles.push(new Particle(random(width), random(height)));
 }
 
