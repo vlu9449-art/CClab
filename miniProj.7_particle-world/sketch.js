@@ -20,7 +20,7 @@ function setup() {
 }
 
 function mousePressed() {
-  particles.push(new Particle(mouseX, mouseY);
+  particles.push(new Particle(mouseX, mouseY));
 }
 
 function keyPressed() {
