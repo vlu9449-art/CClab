@@ -53,7 +53,7 @@ class Particle {
     this.y = y;
     this.x0 = x;
     this.y0 = y;
-    this.dia = random(4, 15);
+    this.dia = random(4, 17);
     this.angle = radians(frameCount * 0.05);
   }
 
