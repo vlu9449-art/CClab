@@ -7,6 +7,13 @@ let particles = [];
 let n = 5;
 let mic;
 let sound1, sound2, sound3;
+
+function preload() {
+  sound1 = loadSound("assets/Big Fish.mp3");
+  sound2 = loadSound("assets/Star Fish.mp3");
+  sound3 = loadSound("assets/Fu-Guang.mp3");
+}
+
 function setup() {
   let canvas = createCanvas(800, 500);
   canvas.parent("p5-canvas-container");
@@ -20,18 +27,26 @@ function setup() {
   }
 }
 
-function preload() {
-  sound1 = loadSound("assets/Big Fish.mp3");
-  sound2 = loadSound("assets/Star Fish.mp3");
-  sound3 = loadSound("assets/Fu-Guang.mp3");
+//Ensure audio context + mic start after user action
+function ensureAudio() {
+  if (getAudioContext().state !== "running") {
+    userStartAudio();
+  }
+  mic.start();
 }
 
 function keyPressed() {
-  if (mouseX < 330 && sound2.isPlaying == false && sound3.isPlaying == flase) {
+  ensureAudio();
+  particles.push(new Particle(random(width), random(height)));
+}
+
+function mousePressed() {
+  ensureAudio();
+  if (mouseX < 330 && sound1.isPlaying() == false && sound2.isPlaying() == false && sound3.isPlaying() == false) {
     sound1.play();
-  } else if (mouseX > 330 && mouseX < 660 && sound1.isPlaying == false && sound3.isPlaying == flase) {
+  } else if (mouseX > 330 && mouseX < 660 && sound1.isPlaying() == false && sound2.isPlaying() == false && sound3.isPlaying() == false) {
     sound2.play();
-  } else if (mouseX > 660 && sound1.isPlaying == false && sound2.isPlaying == flase) {
+  } else if (mouseX > 660 && sound1.isPlaying() == false && sound2.isPlaying() == false && sound3.isPlaying() == false) {
     sound3.play();
   }
 }
