@@ -40,7 +40,7 @@ function draw() {
 
     // limit the number of particles
     if (particles.length > MAX_OF_PARTICLES) {
-      particles.splice(0, 10); // remove the first (oldest) 
+      particles.splice(0, 5); // remove the first (oldest) 
     }
   }
 }
@@ -53,7 +53,7 @@ class Particle {
     this.y = y;
     this.x0 = x;
     this.y0 = y;
-    this.dia = random(3, 10);
+    this.dia = random(4, 15);
     this.angle = radians(frameCount * 0.05);
   }
 
@@ -65,7 +65,7 @@ class Particle {
   }
 
   direction() {
-    let f = map(mic.getLevel(), 0, 1, 0.2, 0.6);
+    let f = map(mic.getLevel(), 0, 1, 0.2, 0.7);
     this.angle -= radians(0.5 * f * PI);
   }
 
@@ -85,10 +85,35 @@ class Particle {
     let b = map(frameCount * 0.1, 0, 100, 60, 90);
     fill(c, s, b, 80);
 
-    //particle
+    //particle: stars
+
+    //particle: 1/4 note
+    // stroke(0);
+    // strokeWeight(1.2);
+    // ellipse(this.x0, this.y0, 13, 10);
+    // // stroke(0);
+    // // strokeWeight(1.5);
+    // line(this.x0 + 7, this.y0 - 1, this.x0 + 13, this.y0 - 31);
+    // arc(this.x0 + 16, this.y0 - 22, 10, 20, 255, 90);
+
+    //particle: 1/8 notes
+    // stroke(0);
+    // strokeWeight(0.5);
+    // ellipse(this.x0, this.y0, 13, 10);
+    // ellipse(this.x0 + 28, this.y0 - 8, 13, 10);
+
+    // strokeWeight(2);
+    // line(this.x0 + 7, this.y0 - 30, this.x0 + 33, this.y0 - 38);
+    // line(this.x0 + 7, this.y0 - 23, this.x0 + 23, this.y0 - 31);
+
+    // stroke(0);
+    // strokeWeight(1.5);
+    // line(this.x0 + 6, this.y0, this.x0 + 6, this.y0 - 30);
+    // line(this.x0 + 34, this.y0 - 8, this.x0 + 34, this.y0 - 38);
+
+
     beginShape();
     for (let i = 0; i < n; i++) {
-      //particle
       let freq = map(frameCount * 0.05, 0, width, 0.4, 0.7);
       let spikes = map(frameCount * 0.08, 0, height, 3, 10);
       let angle = map(i, 0, n, -2 * PI, 2 * PI);
