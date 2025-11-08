@@ -48,6 +48,10 @@ function mousePressed() {
     sound2.play();
   } else if (mouseX > 660 && sound1.isPlaying() == false && sound2.isPlaying() == false && sound3.isPlaying() == false) {
     sound3.play();
+  } else if (sound1.isPlaying() == true || sound2.isPlaying() == true || sound3.isPlaying() == true) {
+    sound1.pause();
+    sound2.pause();
+    sound3.pause();
   }
 }
 
