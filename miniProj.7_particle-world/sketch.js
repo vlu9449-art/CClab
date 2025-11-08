@@ -86,32 +86,6 @@ class Particle {
     fill(c, s, b, 80);
 
     //particle: stars
-
-    //particle: 1/4 note
-    // stroke(0);
-    // strokeWeight(1.2);
-    // ellipse(this.x0, this.y0, 13, 10);
-    // // stroke(0);
-    // // strokeWeight(1.5);
-    // line(this.x0 + 7, this.y0 - 1, this.x0 + 13, this.y0 - 31);
-    // arc(this.x0 + 16, this.y0 - 22, 10, 20, 255, 90);
-
-    //particle: 1/8 notes
-    // stroke(0);
-    // strokeWeight(0.5);
-    // ellipse(this.x0, this.y0, 13, 10);
-    // ellipse(this.x0 + 28, this.y0 - 8, 13, 10);
-
-    // strokeWeight(2);
-    // line(this.x0 + 7, this.y0 - 30, this.x0 + 33, this.y0 - 38);
-    // line(this.x0 + 7, this.y0 - 23, this.x0 + 23, this.y0 - 31);
-
-    // stroke(0);
-    // strokeWeight(1.5);
-    // line(this.x0 + 6, this.y0, this.x0 + 6, this.y0 - 30);
-    // line(this.x0 + 34, this.y0 - 8, this.x0 + 34, this.y0 - 38);
-
-
     beginShape();
     for (let i = 0; i < n; i++) {
       let freq = map(frameCount * 0.05, 0, width, 0.4, 0.7);
@@ -136,4 +110,29 @@ class Particle {
     endShape(CLOSE);
     pop();
   }
+
+  //particle: 1/4 note
+  // stroke(0);
+  // strokeWeight(1.2);
+  // ellipse(this.x0, this.y0, 13, 10);
+  // // stroke(0);
+  // // strokeWeight(1.5);
+  // line(this.x0 + 7, this.y0 - 1, this.x0 + 13, this.y0 - 31);
+  // arc(this.x0 + 16, this.y0 - 22, 10, 20, 255, 90);
+
+  //particle: 1/8 notes
+  // stroke(0);
+  // strokeWeight(0.5);
+  // ellipse(this.x0, this.y0, 13, 10);
+  // ellipse(this.x0 + 28, this.y0 - 8, 13, 10);
+
+  // strokeWeight(2);
+  // line(this.x0 + 7, this.y0 - 30, this.x0 + 33, this.y0 - 38);
+  // line(this.x0 + 7, this.y0 - 23, this.x0 + 23, this.y0 - 31);
+
+  // stroke(0);
+  // strokeWeight(1.5);
+  // line(this.x0 + 6, this.y0, this.x0 + 6, this.y0 - 30);
+  // line(this.x0 + 34, this.y0 - 8, this.x0 + 34, this.y0 - 38);
+
 }
