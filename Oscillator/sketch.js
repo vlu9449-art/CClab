@@ -37,9 +37,9 @@ function draw() {
     b[i].display();
     b[i].playSound();
   }
-  if (mouseIsPressed) {
-    b.push(new Bubble(mouseX, mouseY));
-  }
+  // if (mouseIsPressed) {
+  //   b.push(new Bubble(mouseX, mouseY));
+  // }
 }
 
 // function mousePressed() {
@@ -52,9 +52,12 @@ function draw() {
 // }
 
 class Bubble {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor() {
+    // constructor(x, y) {
+    // this.x = x;
+    // this.y = y;
+    this.x = random(width);
+    this.y = random(height, height * 2);
     this.s = random(5, 50);
     this.speedY = map(this.s, 5, 50, 5, 1);
     this.osc = new p5.SinOsc();
