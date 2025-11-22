@@ -1,50 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;600&display=swap" rel="stylesheet">
 
-  <title>Project B prototype</title>
-
-  <link rel="stylesheet" type="text/css" href="style.css">
-
-  <script src="lib/p5.js"></script>
-  <script src="lib/p5.sound.js"></script>
-
-  <!-- Alternatively, you can import the library via CDN (Content Delivery Network). -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.js"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/addons/p5.sound.js"></script> -->
+    <title>the box model</title>
 </head>
 
 <body>
-  <div>
-    <div id="bg" class="background image"></div>
-  </div>
-  <div class="main-wrapper">
+    <div class="flex-container">
+        <div class="box box-1"><iframe class="canvas1Frame" src="canvas1" frameborder="0"></iframe></div>
+        <div class="box box-2"><iframe class="canvas2Frame" src="canvas2" frameborder="0"></iframe> </div>
 
-    <h1>Project B prototype</h1>
-
-    <!-- the following div will contain the p5 canvas. -->
-    <div id="p5-canvas-container">
-      <!-- p5 canvas will be appended here. -->
     </div>
-  </div>
 
-  <!-- add sounds to background when mouse hover over different areas-->
-  <div id="water area1" class="interactive-bg-area"></div>
-  <div id="water area2" class="interactive-bg-area"></div>
-  <div id="bell tower1" class="interactive-bg-area"></div>
-  <div id="bell tower2" class="interactive-bg-area"></div>
-  <div id="ppl area1" class="interactive-bg-area"></div>
-  <div id="ppl area2" class="interactive-bg-area"></div>
-  <div id="ppl area3" class="interactive-bg-area"></div>
-  <div id="factory area" class="interactive-bg-area"></div>
-  <div id="green area1" class="interactive-bg-area"></div>
-  <div id="green area2" class="interactive-bg-area"></div>
-
-  <!-- the script tag below should always be at the bottom, right before the closing body tag -->
-  <script src="sketch.js"></script>
 </body>
 
 </html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>iframes! multi canvas!</h1>
+    <iframe class="canvas1Frame" src="canvas1" frameborder="0"></iframe>
+    <iframe class="canvas2Frame" width="900" height = "500" src="canvas2" frameborder="0"></iframe>
+
+    <iframe class="canvas3Frame" src="canvas3" frameborder="0"></iframe>
+
+    <iframe class="canvas4Frame" src="canvas4" frameborder="0"></iframe>
+
+    
+</body>
+</html> -->
