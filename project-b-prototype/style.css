@@ -1,8 +1,8 @@
 html,
 body {
-  background-image: url('assets/SH\ painting.png');
+  background-image: url('assets/SH-bg-painting.JPG');
   background-size: cover;
-  background-position: 0px -65px;
+  background-position: 0px -60px;
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
@@ -12,7 +12,7 @@ canvas {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 120px;
+  margin-top: 110px;
 }
 
 .main-wrapper {
@@ -24,4 +24,5 @@ canvas {
 
 h1 {
   text-align: center;
+  font-size: 35px;
 }
