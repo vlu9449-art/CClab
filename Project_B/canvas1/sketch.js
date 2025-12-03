@@ -17,10 +17,18 @@ function setup() {
   canvas.id("p5-canvas");
   canvas.parent("p5-canvas-container");
   imageMode(CENTER);
+
   pv.hide();
-  pv.size(720, 450);
-  if (mouseIsPressed) {
+  pv.size(720, 440);
+}
+
+function keyPressed() {
+  if (keyCode === ENTER) {
     pv.play();
+  } else if (keyCode === SHIFT) {
+    pv.pause();
+  } else if (keyCode === LEFT_ARROW) {
+    pv.stop();
   }
 }
 
