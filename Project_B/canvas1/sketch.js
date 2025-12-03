@@ -49,7 +49,7 @@ function draw() {
     ship.loop();
     wave.loop();
   }
-  if (!riverShouldPlay && ship.isPlaying() && wave.isPlaying() && pvPlaying) {
+  if (!riverShouldPlay && ship.isPlaying() && wave.isPlaying()) {
     ship.stop();
     wave.stop();
   }
@@ -61,7 +61,7 @@ function draw() {
     wind.loop();
   }
 
-  if (!inWindRegion && wind.isPlaying() && pvPlaying) {
+  if (!inWindRegion && wind.isPlaying()) {
     wind.stop();
   }
 
@@ -71,7 +71,7 @@ function draw() {
   if (inBellTower && !bell.isPlaying()) {
     bell.play();
   }
-  if (!inBellTower && bell.isPlaying() && pvPlaying) {
+  if (!inBellTower && bell.isPlaying()) {
     bell.stop();
   }
 }
