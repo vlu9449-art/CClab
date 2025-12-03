@@ -21,6 +21,7 @@ function setup() {
 
   pv.hide();
   pv.size(720, 440);
+  pv.elt.volume = 1.0;
 }
 
 function keyPressed() {
@@ -33,12 +34,23 @@ function keyPressed() {
   }
 }
 
+function setAmbientVolume(v) {
+  ship.setVolume(v);
+  wave.setVolume(v);
+  wind.setVolume(v);
+  bell.setVolume(v);
+}
 
 function draw() {
   image(bg, width / 2, height / 2, width, height + 100);
   image(pv, width / 2, height / 2 + 80);
   let pvPlaying = pv && !pv.elt.paused;
 
+  if (!pv.elt.paused) {
+    setAmbientVolume(0.2);
+  } else {
+    setAmbientVolume(0.7);
+  }
   //sound trigger in different areas
   //river
   let inRiverRegion1 = mouseX >= windowWidth * 160 / 1710 && mouseX <= windowWidth * 500 / 1710 && mouseY >= 390 && mouseY <= 580;
