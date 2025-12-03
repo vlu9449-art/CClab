@@ -37,7 +37,11 @@ function keyPressed() {
 function draw() {
   image(bg, width / 2, height / 2, width, height + 100);
   image(pv, width / 2, height / 2 + 80);
-
+  let pvPlaying = pv && !pv.elt.paused;
+  if (pvPlaying) {
+    stopAllSounds();
+    return;
+  }
   //sound trigger in different areas
   //river
   let inRiverRegion1 = mouseX >= windowWidth * 160 / 1710 && mouseX <= windowWidth * 500 / 1710 && mouseY >= 390 && mouseY <= 580;
