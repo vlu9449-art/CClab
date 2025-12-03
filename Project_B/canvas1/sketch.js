@@ -47,10 +47,11 @@ function draw() {
   let pvPlaying = pv && !pv.elt.paused;
 
   if (!pv.elt.paused) {
-    setAmbientVolume(0.2);
+    setAmbientVolume(0);
   } else {
     setAmbientVolume(0.7);
   }
+
   //sound trigger in different areas
   //river
   let inRiverRegion1 = mouseX >= windowWidth * 160 / 1710 && mouseX <= windowWidth * 500 / 1710 && mouseY >= 390 && mouseY <= 580;
