@@ -3,10 +3,9 @@ let bg, pv;
 // let regions = [];
 let ship, wind, wave, bell;
 let s = 30;
-let video;
 function preload() {
   bg = loadImage("assets/SH-bg-painting.JPG");
-  //pv = createVideo("assets/meetInSH.mp4");
+  pv = createVideo("assets/SH-pv.mp4");
   ship = loadSound("assets/ships.mp3");
   wave = loadSound("assets/wave.mp3");
   wind = loadSound("assets/flag.mp3");
@@ -15,16 +14,15 @@ function preload() {
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
-  //canvas.id("p5-canvas");
+  canvas.id("p5-canvas");
   canvas.parent("p5-canvas-container");
   imageMode(CENTER);
+  pv.hide();
+  pv.size(720, 450);
+  if (mouseIsPressed) {
+    pv.play();
+  }
 }
-
-// function mousePressed() {
-//   pv.play();
-//   pv.hide();
-//   pv.size(720, 450);
-// }
 
 // function doubleClicked() {
 //   pv.loadPixels();
@@ -48,7 +46,7 @@ function setup() {
 
 function draw() {
   image(bg, width / 2, height / 2, width, height + 100);
-  //image(pv, width / 2, height / 2 + 80);
+  image(pv, width / 2, height / 2 + 80);
 
   //sound trigger in different areas
   //river
@@ -82,9 +80,9 @@ function draw() {
   if (inBellTower && !bell.isPlaying()) {
     bell.play();
   }
-  // if (!inBellTower && bell.isPlaying()) {
-  //   bell.stop();
-  // }
+  if (!inBellTower && bell.isPlaying()) {
+    bell.stop();
+  }
 }
 
 function mousePressed() {
