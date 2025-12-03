@@ -38,10 +38,7 @@ function draw() {
   image(bg, width / 2, height / 2, width, height + 100);
   image(pv, width / 2, height / 2 + 80);
   let pvPlaying = pv && !pv.elt.paused;
-  if (pvPlaying) {
-    stopAllSounds();
-    return;
-  }
+
   //sound trigger in different areas
   //river
   let inRiverRegion1 = mouseX >= windowWidth * 160 / 1710 && mouseX <= windowWidth * 500 / 1710 && mouseY >= 390 && mouseY <= 580;
@@ -52,7 +49,7 @@ function draw() {
     ship.loop();
     wave.loop();
   }
-  if (!riverShouldPlay && ship.isPlaying() && wave.isPlaying()) {
+  if (!riverShouldPlay && ship.isPlaying() && wave.isPlaying() && pvPlaying) {
     ship.stop();
     wave.stop();
   }
@@ -64,7 +61,7 @@ function draw() {
     wind.loop();
   }
 
-  if (!inWindRegion && wind.isPlaying()) {
+  if (!inWindRegion && wind.isPlaying() && pvPlaying) {
     wind.stop();
   }
 
@@ -74,7 +71,7 @@ function draw() {
   if (inBellTower && !bell.isPlaying()) {
     bell.play();
   }
-  if (!inBellTower && bell.isPlaying()) {
+  if (!inBellTower && bell.isPlaying() && pvPlaying) {
     bell.stop();
   }
 }
