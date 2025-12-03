@@ -1,7 +1,7 @@
 let bg, pv;
 // let sounds = [];
 // let regions = [];
-let ship, wind, wave, bell, crowds, trees;
+let ship, wind, wave, bell, crowds, trees, rings, bike;
 let s = 30;
 let bellTriggered = false;
 function preload() {
@@ -14,6 +14,8 @@ function preload() {
   crowd = loadSound("assets/crowd.mp3");
   birds = loadSound("assets/birds.mp3");
   trees = loadSound("assets/trees.mp3");
+  rings = loadSound("assets/rings.mp3");
+  bike = loadSound("assets/bike.mp3");
 }
 
 
@@ -45,7 +47,9 @@ function setAmbientVolume(v) {
   bell.setVolume(v + 0.4);
   crowd.setVolume(v - 0.2);
   birds.setVolume(v - 0.2);
-  trees.setVolume(v - 0.3);
+  trees.setVolume(v + 0.6);
+  rings.setVolume(v);
+  bike.setVolume(v - 0.2);
 }
 
 function draw() {
@@ -112,13 +116,17 @@ function draw() {
   let inNature2 = mouseX >= windowWidth * 310 / 1710 && mouseX < windowWidth / 2 - 360 && mouseY >= 570 && mouseY <= height / 2 + 280;
   let natureShouldPlay = inNature1 || inNature2;
 
-  if (natureShouldPlay && !birds.isPlaying() && !trees.isPlaying()) {
+  if (natureShouldPlay && !birds.isPlaying() && !trees.isPlaying() && !rings.isPlaying() && !bike.isPlaying()) {
     birds.loop();
     trees.loop();
+    rings.loop();
+    bike.loop();
   }
-  if (!natureShouldPlay && birds.isPlaying() && trees.isPlaying()) {
+  if (!natureShouldPlay && birds.isPlaying() && trees.isPlaying() && trees.isPlaying() && bike.isPlaying()) {
     birds.stop();
     trees.stop();
+    rings.stop();
+    bike.stop();
   }
 }
 
