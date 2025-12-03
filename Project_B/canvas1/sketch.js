@@ -3,6 +3,7 @@ let bg, pv;
 // let regions = [];
 let ship, wind, wave, bell;
 let s = 30;
+let bellTriggered = false;
 function preload() {
   bg = loadImage("assets/SH-bg-painting.JPG");
   pv = createVideo("assets/SH-pv.mp4");
@@ -36,17 +37,16 @@ function keyPressed() {
 }
 
 function setAmbientVolume(v) {
-  ship.setVolume(v);
+  ship.setVolume(v - 0.3);
   wave.setVolume(v);
   wind.setVolume(v - 0.2);
-  bell.setVolume(v);
-  crowd.setVolume(v - 0.3);
+  bell.setVolume(v + 0.2);
+  crowd.setVolume(v - 0.4);
 }
 
 function draw() {
   image(bg, width / 2, height / 2, width, height + 100);
   image(pv, width / 2, height / 2 + 80);
-  let pvPlaying = pv && !pv.elt.paused;
 
   if (!pv.elt.paused) {
     setAmbientVolume(0);
@@ -83,12 +83,14 @@ function draw() {
   //bell tower
   let inBellTower = mouseX >= windowWidth * 165 / 1710 && mouseX <= windowWidth * 315 / 1710 && mouseY >= 550 && mouseY <= height;
 
-  if (inBellTower && !bell.isPlaying()) {
+  if (inBellTower && !bell.isPlaying() && !bellTriggered) {
     bell.play();
+    bellTriggered = true;
   }
-  if (!inBellTower && bell.isPlaying()) {
+  if (!pv.elt.paused && bell.isPlaying()) {
     bell.stop();
   }
+
 
   //crowd
   let inCrowd1 = mouseX >= windowWidth * 316 / 1710 && mouseX <= windowWidth && mouseY >= height / 2 + 305 && mouseY <= height;
