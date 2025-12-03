@@ -10,6 +10,7 @@ function preload() {
   wave = loadSound("assets/wave.mp3");
   wind = loadSound("assets/flag.mp3");
   bell = loadSound("assets/DongfangHong.mp3");
+  crowd = loadSound("assets/crowd.mp3");
 }
 
 
@@ -37,8 +38,9 @@ function keyPressed() {
 function setAmbientVolume(v) {
   ship.setVolume(v);
   wave.setVolume(v);
-  wind.setVolume(v);
+  wind.setVolume(v - 0.2);
   bell.setVolume(v);
+  crowd.setVolume(v - 0.3);
 }
 
 function draw() {
@@ -86,6 +88,18 @@ function draw() {
   }
   if (!inBellTower && bell.isPlaying()) {
     bell.stop();
+  }
+
+  //crowd
+  let inCrowd1 = mouseX >= windowWidth * 316 / 1710 && mouseX <= windowWidth && mouseY >= height / 2 + 305 && mouseY <= height;
+  let inCrowd2 = mouseX >= windowWidth * 550 / 1710 && mouseX <= windowWidth * 1300 / 1710 && mouseY >= height / 2 - 190 && mouseY <= height / 2 - 145;
+  let crowdShouldPlay = inCrowd1 || inCrowd2;
+
+  if (crowdShouldPlay && !crowd.isPlaying()) {
+    crowd.loop();
+  }
+  if (!crowdShouldPlay && crowd.isPlaying()) {
+    crowd.stop();
   }
 }
 
