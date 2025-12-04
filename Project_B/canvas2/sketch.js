@@ -4,6 +4,7 @@ let img = [];
 let imgH, imgW;
 let autoScrollSpeed = 3;
 let scrollZone = 150;
+
 let handPose;
 let video;
 let hands = [];
