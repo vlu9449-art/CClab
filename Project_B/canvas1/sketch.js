@@ -76,6 +76,13 @@ function draw() {
     ship.stop();
     wave.stop();
   }
+  if (riverShouldPlay) {
+    noFill();
+    stroke(30, 100, 255, 40);
+    strokeWeight(8);
+    rect(windowWidth * 160 / 1710, 390, 340 * windowWidth / 1710, 190);
+    rect(windowWidth * 1210 / 1710, 360, 390 * windowWidth / 1710, 200);
+  }
 
   //flag
   let inWindRegion = mouseX >= windowWidth * 230 / 1710 && mouseX <= windowWidth * 350 / 1710 && mouseY >= 185 && mouseY <= 250;
@@ -83,7 +90,6 @@ function draw() {
   if (inWindRegion && !wind.isPlaying()) {
     wind.loop();
   }
-
   if (!inWindRegion && wind.isPlaying()) {
     wind.stop();
   }
@@ -94,10 +100,17 @@ function draw() {
   if (inBellTower && !bell.isPlaying() && !bellTriggered) {
     bell.play();
     bellTriggered = true;
+
   }
   if (!pv.elt.paused && bell.isPlaying()) {
     bell.stop();
     bellTriggered = false;
+  }
+  if (inBellTower) {
+    noFill();
+    stroke(255, 255, 50, 100);
+    strokeWeight(5);
+    rect(windowWidth * 175 / 1710, 560, 130 * windowWidth / 1710, height - 560);
   }
 
   //crowd
@@ -128,6 +141,13 @@ function draw() {
     trees.stop();
     rings.stop();
     bike.stop();
+  }
+  if (natureShouldPlay) {
+    noFill();
+    stroke(120, 255, 120, 90);
+    strokeWeight(7);
+    rect(windowWidth * 20 / 1710, 420, 150 * windowWidth / 1710, 210);
+    rect(windowWidth * 310 / 1710, 570, windowWidth / 2 - 360 - windowWidth * 310 / 1710, height / 2 - 290);
   }
 }
 
