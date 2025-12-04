@@ -4,6 +4,12 @@ let img = [];
 let imgH, imgW;
 let autoScrollSpeed = 3;
 let scrollZone = 150;
+let handPose;
+let video;
+let hands = [];
+let options = { maxHands: 1, flipped: false };
+let p1 = 0;
+let p2 = 0;
 
 function preload() {
   bg = loadImage("assets/Yulan.png");
@@ -11,6 +17,7 @@ function preload() {
     let fileName = 'assets/' + i + '.jpg';
     img.push(loadImage(fileName));
   }
+  handPose = ml5.handPose(options);
 }
 
 function setup() {
@@ -28,6 +35,19 @@ function setup() {
     let baseSpeed = 0.3 + i * 0.05;
     pix.push(new Pix(img[i], x, y, baseSpeed));
   }
+
+  video = createCapture(VIDEO);
+  video.size(640, 480);
+  video.hide();
+
+  // Start detecting hands from the webcam video
+  handPose.detectStart(video, gotHands);
+}
+
+// Callback function for when handPose outputs data
+function gotHands(results) {
+  // Save the output to the hands variable
+  hands = results;
 }
 
 function draw() {
