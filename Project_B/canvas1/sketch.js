@@ -47,9 +47,9 @@ function setAmbientVolume(v) {
   bell.setVolume(v + 0.4);
   crowd.setVolume(v - 0.2);
   birds.setVolume(v - 0.2);
-  trees.setVolume(v + 0.6);
+  trees.setVolume(v + 0.5);
   rings.setVolume(v);
-  bike.setVolume(v - 0.2);
+  bike.setVolume(v - 0.4);
 }
 
 function draw() {
@@ -97,6 +97,7 @@ function draw() {
   }
   if (!pv.elt.paused && bell.isPlaying()) {
     bell.stop();
+    bellTriggered = false;
   }
 
   //crowd
