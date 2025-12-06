@@ -31,13 +31,17 @@ function setup() {
 }
 
 function keyPressed() {
-  if (keyCode === ENTER) {
+  if (keyCode === SPACE) {
     pv.play();
   } else if (keyCode === SHIFT) {
     pv.pause();
   } else if (keyCode === LEFT_ARROW) {
     pv.stop();
   }
+}
+
+function reminder() {
+
 }
 
 function setAmbientVolume(v) {
