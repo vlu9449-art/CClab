@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: auto;
 }
 
 canvas {
@@ -9,9 +10,8 @@ canvas {
 }
 
 #p5-canvas-container {
-  position: absolute;
-  left: 0px;
-  top: 0px;
+  position: relative;
+  width: 140vw;
   z-index: -1;
 }
 
