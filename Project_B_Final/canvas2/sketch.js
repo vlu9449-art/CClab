@@ -8,7 +8,7 @@ let scrollZone = 150;
 let handPose;
 let video;
 let hands = [];
-let options = { maxHands: 1, flipped: false };
+let options = { maxHands: 1, flipped: true };
 let p1;
 let p2;
 
@@ -83,8 +83,8 @@ function draw() {
   for (let i = 0; i < hands.length; i++) {
     let hand = hands[i];
     for (let j = 0; j < hand.keypoints.length; j++) {
-      p1 = hand.keypoints[8];
-      p2 = hand.keypoints[7];
+      p1 = hand.keypoints[4];
+      p2 = hand.keypoints[8];
       fill(120, 140, 180);
       noStroke();
       circle(p1.x, p1.y, 10);
