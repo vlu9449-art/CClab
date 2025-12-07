@@ -1,3 +1,5 @@
+let sections = [];
+
 let bg;
 let pix = [];
 let img = [];
@@ -24,23 +26,23 @@ function preload() {
 }
 
 function setup() {
-  let canvas = createCanvas(windowWidth * 1.2, windowHeight * 1.36);
+  let canvas = createCanvas(windowWidth, windowHeight);
 
   // // make the whole document at least as wide as the canvas
   // document.body.style.width = w + 'px';
   canvas.parent("p5-canvas-container");
   imageMode(CENTER);
 
-  let numRows = 3;
-  let rowSpacing = height / 3;
+  // let numRows = 3;
+  // let rowSpacing = height / 3;
 
-  for (let i = 0; i < img.length; i++) {
-    let r = i % numRows;
-    let y = height / 5 + r * rowSpacing;
-    let x = random(-width, width);
-    let baseSpeed = 0.3 + i * 0.05;
-    pix.push(new Pix(img[i], x, y, baseSpeed));
-  }
+  // for (let i = 0; i < img.length; i++) {
+  //   let r = i % numRows;
+  //   let y = height / 5 + r * rowSpacing;
+  //   let x = random(-width, width);
+  //   let baseSpeed = 0.3 + i * 0.05;
+  //   pix.push(new Pix(img[i], x, y, baseSpeed));
+  // }
 
   // video = createCapture(VIDEO);
   // video.size(windowWidth, windowHeight);
@@ -69,12 +71,12 @@ function draw() {
   // if (cameraMode) {
   //   hideVideo();
   // }
-  image(bg, width / 2, height / 2, width, height);
+  // image(bg, width / 2, height / 2, width, height);
 
-  for (let i = 0; i < img.length; i++) {
-    pix[i].update();
-    pix[i].display();
-  }
+  // for (let i = 0; i < img.length; i++) {
+  //   pix[i].update();
+  //   pix[i].display();
+  // }
 
   // // Draw all tracked hand points
   // for (let i = 0; i < hands.length; i++) {
@@ -88,4 +90,24 @@ function draw() {
   //     circle(p2.x, p2.y, 10);
   //   }
   // }
+}
+
+function drawIndex() {
+
+}
+
+function drawDay() {
+
+}
+
+function drawEve() {
+
+}
+
+function drawNight() {
+
+}
+
+function drawFood() {
+
 }
