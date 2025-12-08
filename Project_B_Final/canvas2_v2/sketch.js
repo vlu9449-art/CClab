@@ -19,15 +19,38 @@ let scrollZone = 150;
 let cameraMode = false;
 
 function preload() {
-  bg = loadImage("assets/Yulan.JPG");
+  //index page
+  sbg[0] = loadImage("assets/view.jpg");
+  sbg[1] = loadImage("assets/ppl.jpg");
+  sbg[2] = loadImage("assets/food.jpg");
+
+  birds = loadSound("assets/birds.mp3");
+  trees = loadSound("assets/trees.mp3");
+  rings = loadSound("assets/rings.mp3");
+  bike = loadSound("assets/bike.mp3");
+  crowd = loadSound("assets/crowd.mp3");
+  stew = loadSound("assets/stew.mp3");
+
+  //view page
   for (let i = 1; i < 29; i++) {
     let fileName = 'assets/' + i + '.jpg';
     img.push(loadImage(fileName));
   }
-  sbg[0] = loadImage("assets/view.jpg");
-  sbg[1] = loadImage("assets/ppl.jpg");
-  sbg[2] = loadImage("assets/food.jpg");
+
+  //people page
+
+  //food page
+
   //  handPose = ml5.handPose(options);
+}
+
+function setAmbientVolume(v) {
+  birds.setVolume(v - 0.2);
+  trees.setVolume(v + 0.5);
+  rings.setVolume(v);
+  bike.setVolume(v - 0.4);
+  crowd.setVolume(v - 0.2);
+  stew.setVolume(v + 0.4);
 }
 
 function setup() {
@@ -77,6 +100,12 @@ function draw() {
   //background(225);
   if (page === 0) {
     drawIndexPage();
+  } else if (page === 1) {
+    drawView();
+  } else if (page === 2) {
+    drawPpl();
+  } else if (page === 3) {
+    drawFood();
   }
   // if (cameraMode) {
   //   hideVideo();
@@ -112,7 +141,8 @@ function setupIndex() {
     text: "View",
     alpha: 0,
     startFrame: 0,
-    img: sbg[0]
+    img: sbg[0],
+    page: 1,
   });
 
   sections.push({
@@ -121,7 +151,8 @@ function setupIndex() {
     text: "People",
     alpha: 0,
     startFrame: 50,  //start later
-    img: sbg[1]
+    img: sbg[1],
+    page: 2,
   });
 
   sections.push({
@@ -130,7 +161,8 @@ function setupIndex() {
     text: "Food",
     alpha: 0,
     startFrame: 100,
-    img: sbg[2]
+    img: sbg[2],
+    page: 3,
   });
 }
 
@@ -166,14 +198,19 @@ function drawIndexPage() {
     noStroke();
     rect(width / 2 - 240, 65, 650, 40);
     rect(width / 2 + 150, 135, 800, 40);
+    rect(width / 2 - 338, 185, 455, 30);
 
     fill(230, s.alpha);
     textFont("Serif");
-    textSize(30);
     stroke(45);
     strokeWeight(2);
+    textSize(30);
     text('I have divided my memories into different sections.', width / 2 - 240, 65);
     text('Please choose a specific type of moment you would like to see...', width / 2 + 150, 135);
+    textFont("Times New Roman");
+    textSize(15);
+    strokeWeight(1);
+    text('(Click the mouse and then move it around... wait, do you hear something?)', width / 2 - 338, 185);
 
     //draw text boxes
     push();
@@ -208,20 +245,122 @@ function drawIndexPage() {
     text(s.text, s.x + s.w / 2, h);
     pop();
   }
+
+  //add sound
+  setAmbientVolume(0.6);
+  let view = mouseX < width / 3;
+  if (view && !birds.isPlaying() && !trees.isPlaying() && !bike.isPlaying() && !rings.isPlaying()) {
+    birds.loop();
+    trees.loop();
+    bike.play();
+    rings.play();
+  }
+  if (!view && birds.isPlaying() && trees.isPlaying() && bike.isPlaying() && rings.isPlaying()) {
+    birds.stop();
+    trees.stop();
+    bike.stop();
+    rings.stop();
+  }
+  let ppl = mouseX > width / 3 && mouseX < 2 * width / 3;
+  if (ppl && !crowd.isPlaying()) {
+    crowd.play();
+  }
+  if (!ppl && crowd.isPlaying()) {
+    crowd.stop();
+  }
+  let food = mouseX > 2 * width / 3;
+  if (food && !stew.isPlaying()) {
+    stew.play();
+  }
+  if (!food && stew.isPlaying()) {
+    stew.stop();
+  }
 }
 
-function drawDay() {
+function mousePressed() {
+  userStartAudio();
 
+  if (page === 0) {
+    for (let i = 0; i < sections.length; i++) {
+      let s = sections[i];
+
+      // compute the same h as in drawIndexPage
+      let h = 3 * height / 4 + 8 * sin(frameCount * 0.05);
+
+      let inTextBox =
+        mouseX >= s.x + s.w / 2 - 100 &&
+        mouseX <= s.x + s.w / 2 + 100 &&
+        mouseY >= h - 40 &&
+        mouseY <= h + 40;
+
+      if (inTextBox) {
+        birds.stop();
+        trees.stop();
+        bike.stop();
+        rings.stop();
+        crowd.stop();
+        stew.stop();
+
+        //go to the corresponding page
+        page = s.page;
+      }
+    }
+  }
+  if (page !== 0) {
+    let bx = 20;
+    let by = 20;
+    let bw = 120;
+    let bh = 40;
+
+    let inBackButton =
+      mouseX >= bx && mouseX <= bx + bw &&
+      mouseY >= by && mouseY <= by + bh;
+
+    if (inBackButton) {
+      page = 0;
+
+      //reset or re-run index setup if needed
+      sections = [];
+      setupIndex();
+    }
+  }
 }
 
-function drawEve() {
 
+
+function drawView() {
+  background(220);
+
+  drawBackButton();
 }
 
-function drawNight() {
+function drawPpl() {
+  background(220);
 
+  drawBackButton();
 }
 
 function drawFood() {
+  background(220);
 
+  drawBackButton();
+}
+
+function drawBackButton() {
+  let bx = 20;
+  let by = 20;
+  let bw = 120;
+  let bh = 40;
+
+  push();
+  rectMode(CORNER);
+  fill(40, 120);
+  noStroke();
+  rect(bx, by, bw, bh);
+
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(16);
+  text("Back", bx + bw / 2, by + bh / 2);
+  pop();
 }

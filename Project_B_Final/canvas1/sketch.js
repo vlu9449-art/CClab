@@ -106,7 +106,7 @@ function draw() {
     bellTriggered = true;
 
   }
-  if (!pv.elt.paused && bell.isPlaying()) {
+  if (!pv.elt.paused && bell.isPlaying() && mouseY > height) {
     bell.stop();
     bellTriggered = false;
   }
@@ -125,7 +125,7 @@ function draw() {
   if (crowdShouldPlay && !crowd.isPlaying()) {
     crowd.loop();
   }
-  if (!crowdShouldPlay && crowd.isPlaying()) {
+  if (!crowdShouldPlay && crowd.isPlaying() && mouseY > height) {
     crowd.stop();
   }
 
