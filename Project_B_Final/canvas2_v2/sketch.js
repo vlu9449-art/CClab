@@ -32,15 +32,23 @@ function preload() {
   stew = loadSound("assets/stew.mp3");
 
   //view page
+  bg = loadImage("assets/Yulan.JPG")
   for (let i = 1; i < 29; i++) {
-    let fileName = 'assets/' + i + '.jpg';
+    let fileName = 'assets/v' + i + '.jpg';
     img.push(loadImage(fileName));
   }
 
   //people page
+  for (let i = 1; i < 29; i++) {
+    let fileName = 'assets/p' + i + '.jpg';
+    img.push(loadImage(fileName));
+  }
 
   //food page
-
+  for (let i = 1; i < 29; i++) {
+    let fileName = 'assets/f' + i + '.jpg';
+    img.push(loadImage(fileName));
+  }
   //  handPose = ml5.handPose(options);
 }
 
@@ -348,19 +356,22 @@ function drawFood() {
 
 function drawBackButton() {
   let bx = 20;
-  let by = 20;
-  let bw = 120;
+  let by = height - 60;
+  let bw = 100;
   let bh = 40;
 
   push();
   rectMode(CORNER);
-  fill(40, 120);
+  fill(230, 120);
   noStroke();
   rect(bx, by, bw, bh);
 
   fill(255);
+  stroke(30);
+  strokeWeight(1);
   textAlign(CENTER, CENTER);
   textSize(16);
+  textFont('Serif');
   text("Back", bx + bw / 2, by + bh / 2);
   pop();
 }
