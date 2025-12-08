@@ -524,6 +524,15 @@ function drawFood() {
     }
   }
 
+  fill(80, 180);
+  stroke(230, 180);
+  strokeWeight(0.5);
+  rect(width / 2, 60, 600, 40)
+  textSize(24);
+  fill(20, 220);
+  stroke(255);
+  strokeWeight(3);
+  text('Press SPACE and open your mouth!', width / 2, 60);
   drawBackButton();
 }
 
