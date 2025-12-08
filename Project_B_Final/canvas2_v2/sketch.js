@@ -24,21 +24,18 @@ function preload() {
     let fileName = 'assets/' + i + '.jpg';
     img.push(loadImage(fileName));
   }
-  sbg[1] = loadImage("assets/view.jpg");
-  sbg[2] = loadImage("assets/ppl.jpg");
-  sbg[3] = loadImage("assets/food.jpg");
+  sbg[0] = loadImage("assets/view.jpg");
+  sbg[1] = loadImage("assets/ppl.jpg");
+  sbg[2] = loadImage("assets/food.jpg");
   //  handPose = ml5.handPose(options);
 }
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
-
-  // // make the whole document at least as wide as the canvas
-  // document.body.style.width = w + 'px';
   canvas.parent("p5-canvas-container");
   imageMode(CENTER);
-  textFont('Georgia');
   textAlign(CENTER, CENTER);
+  rectMode(CENTER);
 
   if (page === 0) {
     setupIndex();
@@ -78,7 +75,9 @@ function setup() {
 
 function draw() {
   //background(225);
-  drawIndexPage();
+  if (page === 0) {
+    drawIndexPage();
+  }
   // if (cameraMode) {
   //   hideVideo();
   // }
@@ -133,10 +132,10 @@ function setupIndex() {
     startFrame: 100,
     img: sbg[2]
   });
-
 }
 
 function drawIndexPage() {
+  background(0);
   for (let i = 0; i < sections.length; i++) {
     let s = sections[i];
 
@@ -147,18 +146,66 @@ function drawIndexPage() {
       s.alpha = min(s.alpha, 255);
     }
 
+    //draw section images
+    if (s.img) {
+      push();
+      tint(255, s.alpha); //fade image in
+      image(s.img, s.x + s.w / 2, height / 2, s.w, height);
+      pop();
+    }
+
     //draw thin deviding line between sections
     if (i < sections.length - 1) {
-      stroke(200, s.alpha);
-      strokeWeight(0.8);
+      stroke(240, s.alpha);
+      strokeWeight(3);
       line(s.x + s.w, 0, s.x + s.w, height);
     }
 
-    //draw text
+    //guide of section choice (box + text)
+    fill(45, 85);
+    noStroke();
+    rect(width / 2 - 240, 65, 650, 40);
+    rect(width / 2 + 150, 135, 800, 40);
+
+    fill(230, s.alpha);
+    textFont("Serif");
+    textSize(30);
+    stroke(45);
+    strokeWeight(2);
+    text('I have divided my memories into different sections.', width / 2 - 240, 65);
+    text('Please choose a specific type of moment you would like to see...', width / 2 + 150, 135);
+
+    //draw text boxes
     push();
-    fill(255, s.alpha);
-    textSize(24);
-    text(s.text, s.x + s.w / 2, 40);
+    let img = s.img; //section images
+    img.loadPixels();
+
+    let h = 3 * height / 4 + 8 * sin(frameCount * 0.05);
+
+    //pixel index
+    let px = floor(s.x + s.w / 2);
+    let py = floor(h);
+    let idx = (px + py * img.width) * 4;
+    //define color according to pixel index
+    let r = img.pixels[idx];
+    let g = img.pixels[idx + 1];
+    let b = img.pixels[idx + 2];
+    //define opacity according to mouse position
+    let inTextBox = mouseX >= s.x + s.w / 2 - 100 && mouseX <= s.x + s.w / 2 + 100 && mouseY >= h - 40 && mouseY <= h + 40;
+    let o = 90;
+    if (inTextBox) {
+      o = 220;
+    }
+    fill(r, g, b, o);
+    noStroke();
+    rect(s.x + s.w / 2, h, 200, 80);
+    //draw text
+    textFont('Serif');
+    fill(250, s.alpha);
+    textSize(65);
+    stroke(70);
+    strokeWeight(3);
+    text(s.text, s.x + s.w / 2, h);
     pop();
   }
 }
