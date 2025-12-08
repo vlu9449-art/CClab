@@ -1,3 +1,4 @@
+//View pix
 class Pix {
     constructor(img, x, y, baseSpeed) {
         this.pix = img;
@@ -30,3 +31,55 @@ class Pix {
     }
 }
 
+//ppl pix
+class Picture {
+    constructor(img, x, y) {
+        this.img = img;
+        this.x = x;
+        this.y = y;
+        this.x0 = x;
+        this.y0 = y;
+        this.size = 40;
+        this.growth = 4;
+        this.walkPass = false;
+    }
+    update() {
+        this.x = lerp(this.x0, this.x0 - 600, 0.1);
+        this.y = lerp(this.y0, this.y0 + 300, 0.1);
+        this.size += this.growth;
+
+        if (this.size > 400) {
+            this.walkPass = true;
+        }
+    }
+    display() {
+        imageMode(CENTER);
+        image(this.img, this.x, this.y, this.size, this.size);
+    }
+}
+
+// food pix
+class PixF {
+    constructor(img, x, y) {
+        this.img = img;
+        this.pos = createVector(x, y);
+        this.pos.y = y;
+        this.size = 250;
+        this.remove = false;
+    }
+    update(mouthOpen, mouthPos) {
+        if (mouthOpen && mouthPos) {
+            //move to mouth
+            this.pos.lerp(mouthPos, 0.1);
+            //shrink
+            this.size *= 0.9;
+            //disappear
+            if (this.size < 10) {
+                this.remove = true;
+            }
+        }
+    }
+    display(mouthOpen) {
+        image(this.img, this.pos.x, this.pos.y, this.size, this.size)
+    }
+}
