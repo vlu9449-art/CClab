@@ -1,4 +1,5 @@
 let sections = [];
+let sbg = [];
 
 let bg;
 let pix = [];
@@ -22,6 +23,9 @@ function preload() {
     let fileName = 'assets/' + i + '.jpg';
     img.push(loadImage(fileName));
   }
+  sbg[1] = loadImage("assets/view.jpg");
+  sbg[2] = loadImage("assets/ppl.jpg");
+  sbg[3] = loadImage("assets/food.jpg");
   //  handPose = ml5.handPose(options);
 }
 
@@ -32,7 +36,10 @@ function setup() {
   // document.body.style.width = w + 'px';
   canvas.parent("p5-canvas-container");
   imageMode(CENTER);
+  textFont('Georgia');
+  textAlign(CENTER, CENTER);
 
+  setupIndex();
   // let numRows = 3;
   // let rowSpacing = height / 3;
 
@@ -67,7 +74,8 @@ function setup() {
 // }
 
 function draw() {
-  background(225);
+  //background(225);
+  drawIndexPage();
   // if (cameraMode) {
   //   hideVideo();
   // }
@@ -92,8 +100,64 @@ function draw() {
   // }
 }
 
-function drawIndex() {
+function setupIndex() {
+  let sectionWidth = width / 3;
 
+  //sections start to appear
+  sections.push({
+    x: 0,
+    w: sectionWidth,
+    text: "View",
+    alpha: 0,
+    startFrame: 0,
+    img: sbg[0]
+  });
+
+  sections.push({
+    x: sectionWidth,
+    w: sectionWidth,
+    text: "People",
+    alpha: 0,
+    startFrame: 50,  //start later
+    img: sbg[1]
+  });
+
+  sections.push({
+    x: sectionWidth * 2,
+    w: sectionWidth,
+    text: "Food",
+    alpha: 0,
+    startFrame: 100,
+    img: sbg[2]
+  });
+
+}
+
+function drawIndexPage() {
+  for (let i = 0; i < sections.length; i++) {
+    let s = sections[i];
+
+    //fade in using alpha
+    let fadeSpeed = 3;
+    if (frameCount > s.startFrame && s.alpha < 255) {
+      s.alpha += fadeSpeed;
+      s.alpha = min(s.alpha, 255);
+    }
+
+    //draw thin deviding line between sections
+    if (i < sections.length - 1) {
+      stroke(200, s.alpha);
+      strokeWeight(0.8);
+      line(s.x + s.w, 0, s.x + s.w, height);
+    }
+
+    //draw text
+    push();
+    fill(255, s.alpha);
+    textSize(24);
+    text(s.text, s.x + s.w / 2, 40);
+    pop();
+  }
 }
 
 function drawDay() {
