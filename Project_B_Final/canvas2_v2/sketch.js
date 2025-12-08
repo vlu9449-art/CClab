@@ -1,5 +1,6 @@
 let sections = [];
 let sbg = [];
+let page = 0;
 
 let bg;
 let pix = [];
@@ -39,7 +40,9 @@ function setup() {
   textFont('Georgia');
   textAlign(CENTER, CENTER);
 
-  setupIndex();
+  if (page === 0) {
+    setupIndex();
+  }
   // let numRows = 3;
   // let rowSpacing = height / 3;
 
