@@ -86,6 +86,12 @@ function draw() {
     strokeWeight(8);
     rect(windowWidth * 160 / 1710, 390, 340 * windowWidth / 1710, 190);
     rect(windowWidth * 1210 / 1710, 360, 390 * windowWidth / 1710, 200);
+    textFont('Serif');
+    textSize(24);
+    fill(10, 180);
+    stroke(200);
+    strokeWeight(2);
+    text('Shh... do you hear anything?', 180, 340);
   }
 
   //flag

@@ -45,3 +45,8 @@ body {
 iframe {
     display: block;
 }
+
+.gap {
+    height: 50px;
+    background: white;
+}
