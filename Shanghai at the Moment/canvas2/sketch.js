@@ -402,8 +402,6 @@ function waving() {
   palmX = width - p.x;
   palmY = p.y;
 
-
-
   let fistD = dist(tipX, tipY, palmX, palmY);
   wave = (fistD > 80);
 
@@ -440,6 +438,14 @@ function drawPpl() {
     circle(width - p1.x, p1.y, 20);
     circle(width - p2.x, p2.y, 20);
   }
+  fill(80, 180);
+  stroke(230, 180);
+  rect(width / 2, 60, 600, 40)
+  textSize(24);
+  fill(20, 220);
+  stroke(255);
+  strokeWeight(3);
+  text('Try opening your hand and then close it to make fists!', width / 2, 60);
 
   drawBackButton();
 }
