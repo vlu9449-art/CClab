@@ -31,17 +31,13 @@ function setup() {
 }
 
 function keyPressed() {
-  if (keyCode === SPACE) {
+  if (keyCode === ENTER) {
     pv.play();
   } else if (keyCode === SHIFT) {
     pv.pause();
   } else if (keyCode === LEFT_ARROW) {
     pv.stop();
   }
-}
-
-function reminder() {
-
 }
 
 function setAmbientVolume(v) {
@@ -146,7 +142,7 @@ function draw() {
     rings.loop();
     bike.loop();
   }
-  if (!natureShouldPlay && birds.isPlaying() && trees.isPlaying() && trees.isPlaying() && bike.isPlaying()) {
+  if (!natureShouldPlay && birds.isPlaying() && trees.isPlaying() && trees.isPlaying() && bike.isPlaying() && mouseY > height) {
     birds.stop();
     trees.stop();
     rings.stop();
