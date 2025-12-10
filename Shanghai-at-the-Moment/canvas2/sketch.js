@@ -151,7 +151,7 @@ function setupIndex() {
     w: sectionWidth,
     text: "People",
     alpha: 0,
-    startFrame: 30,  //start later
+    startFrame: 25,  //start later
     img: sbg[1],
     page: 2,
   });
@@ -161,7 +161,7 @@ function setupIndex() {
     w: sectionWidth,
     text: "Food",
     alpha: 0,
-    startFrame: 60,
+    startFrame: 50,
     img: sbg[2],
     page: 3,
   });
@@ -521,14 +521,14 @@ function mouthInfo() {
   return { openness, center };
 }
 
-function keyPressed() {
-  if (keyCode === 32) {
-    let x = random(width);
-    let y = random(height);
-    let idx = floor(random(fimg.length))
-    pix.push(new PixF(fimg[idx], x, y));
-  }
-}
+// function keyPressed() {
+//   if (keyCode === 32) {
+//     let x = random(width);
+//     let y = random(height);
+//     let idx = floor(random(fimg.length))
+//     pix.push(new PixF(fimg[idx], x, y));
+//   }
+// }
 
 
 function drawFood() {
@@ -537,8 +537,14 @@ function drawFood() {
   let mouthPos = null;
   let mouth = mouthInfo();
   if (mouth) {
-    mouthOpen = mouth.openness > 40; // adjust threshold
+    mouthOpen = mouth.openness > 35; // adjust threshold
     mouthPos = mouth.center;
+  }
+  if (mouthOpen) {
+    let x = random(width);
+    let y = random(height);
+    let idx = floor(random(fimg.length))
+    pix.push(new PixF(fimg[idx], x, y));
   }
   for (let i = pix.length - 1; i >= 0; i--) {
 
