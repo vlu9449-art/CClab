@@ -69,7 +69,7 @@ function preload() {
 
   //food page
   fd = loadImage("assets/SHFood.JPG");
-  for (let i = 1; i < 3; i++) {
+  for (let i = 1; i < 9; i++) {
     let fileName = 'assets/f' + i + '.JPG';
     fimg.push(loadImage(fileName));
   }
