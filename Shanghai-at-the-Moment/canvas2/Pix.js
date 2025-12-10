@@ -32,29 +32,31 @@ class Pix {
 }
 
 //ppl pix
-class Picture {
+class PixP {
     constructor(img, x, y) {
         this.img = img;
         this.x = x;
         this.y = y;
         this.x0 = x;
         this.y0 = y;
-        this.size = 40;
+        this.imgH = random(180, 240);
+        this.imgW = (img.width / img.height) * this.imgH;
         this.growth = 4;
         this.walkPass = false;
     }
     update() {
         this.x = lerp(this.x0, this.x0 - 600, 0.1);
         this.y = lerp(this.y0, this.y0 + 300, 0.1);
-        this.size += this.growth;
+        this.imgH += this.growth;
+        this.imgW += (this.img.width / this.img.height) * this.growth;
 
-        if (this.size > 400) {
+        if (this.imgH > 400 || this.imgW > 600) {
             this.walkPass = true;
         }
     }
     display() {
         imageMode(CENTER);
-        image(this.img, this.x, this.y, this.size, this.size);
+        image(this.img, this.x, this.y, this.imgW, this.imgH);
     }
 }
 

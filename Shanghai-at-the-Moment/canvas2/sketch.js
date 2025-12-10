@@ -61,7 +61,7 @@ function preload() {
 
   //people page
   people = loadImage("assets/people.JPG");
-  for (let i = 1; i < 9; i++) {
+  for (let i = 1; i <= 11; i++) {
     let fileName = 'assets/p' + i + '.JPG';
     pimg.push(loadImage(fileName));
   }
@@ -430,7 +430,9 @@ function waving() {
 
   if (wave && !prevWave) {
     let img = random(pimg);
-    pics.push(new Picture(img, width / 2 + 200, height / 2 + 100));
+    let px = random(100, width - 100);
+    let py = random(height / 2, height - 200);
+    pics.push(new PixP(img, px, py));
   }
 }
 
@@ -482,6 +484,20 @@ function gotFaces(results) {
   faces = results;
 }
 
+
+function setupFood() {
+  pix = [];
+
+  video = createCapture(VIDEO);
+  video.size(width, height);
+  video.hide();
+  cameraMode = true;
+  faceMesh.detectStart(video, gotFaces);
+  if (cameraMode) {
+    hideVideo();
+  }
+}
+
 function mouthInfo() {
   if (faces.length === 0) {
     return null;
@@ -503,19 +519,6 @@ function mouthInfo() {
   );
 
   return { openness, center };
-}
-
-function setupFood() {
-  pix = [];
-
-  video = createCapture(VIDEO);
-  video.size(width, height);
-  video.hide();
-  cameraMode = true;
-  faceMesh.detectStart(video, gotFaces);
-  if (cameraMode) {
-    hideVideo();
-  }
 }
 
 function keyPressed() {
