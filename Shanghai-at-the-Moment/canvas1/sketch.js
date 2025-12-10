@@ -127,7 +127,7 @@ function draw() {
   if (crowdShouldPlay && !crowd.isPlaying()) {
     crowd.loop();
   }
-  if (!crowdShouldPlay && crowd.isPlaying() && mouseY > height) {
+  if (!crowdShouldPlay && crowd.isPlaying() || mouseY > height) {
     crowd.stop();
   }
 
@@ -142,7 +142,7 @@ function draw() {
     rings.loop();
     bike.loop();
   }
-  if (!natureShouldPlay && birds.isPlaying() && trees.isPlaying() && trees.isPlaying() && bike.isPlaying() && mouseY > height) {
+  if (!natureShouldPlay && birds.isPlaying() && trees.isPlaying() && trees.isPlaying() && bike.isPlaying()) {
     birds.stop();
     trees.stop();
     rings.stop();
