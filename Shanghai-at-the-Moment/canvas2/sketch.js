@@ -39,7 +39,6 @@ let faces = [];
 let options2 = { maxFaces: 1, refineLandmarks: false, flipped: false };
 
 
-
 function preload() {
   //index page
   sbg[0] = loadImage("assets/view.jpg");
@@ -97,7 +96,6 @@ function setup() {
 
   setupIndex();
 }
-
 
 
 
@@ -346,11 +344,36 @@ function drawView() {
     pix[i].update();
     pix[i].display();
   }
+
+  fill(20, 120);
+  stroke(230, 100);
+  strokeWeight(1);
+  rect(350, 40, 690, 40);
+
   textSize(24);
-  fill(255, 220);
+  fill(240, 250);
   stroke(10);
   strokeWeight(2);
   text('Try moving your mouse left & right or up & down, see how it goes!', 350, 40);
+
+  let flower = mouseX >= 1000 && mouseX < width && mouseY >= 0 && mouseY <= 300;
+  if (flower) {
+    fill(200, 120, 120, 160);
+    stroke(230, 100);
+    strokeWeight(1);
+    rect(width - 600, 100, 550, 100);
+
+    textSize(20);
+    fill(255);
+    stroke(10);
+    strokeWeight(3);
+    text(
+      "This flower in the background is the flower of the city,\n" +
+      "the magnolia flower. It is called Yulan in Chinese.\n" +
+      "It symbolizes the pioneering and forward-looking spirit of the city.",
+      width - 600, 100
+    );
+  }
   drawBackButton();
 }
 
@@ -435,8 +458,8 @@ function drawPpl() {
 
     fill(255, 180);
     noStroke();
-    circle(width - p1.x, p1.y, 20);
-    circle(width - p2.x, p2.y, 20);
+    circle(p1.x, p1.y, 20);
+    circle(p2.x, p2.y, 20);
   }
   fill(80, 180);
   stroke(230, 180);
@@ -546,9 +569,9 @@ function drawBackButton() {
 
   fill(255);
   stroke(30);
-  strokeWeight(3);
+  strokeWeight(4);
   textAlign(CENTER, CENTER);
-  textSize(16);
+  textSize(18);
   textFont('Serif');
   text("Back", bx + bw / 2, by + bh / 2);
   pop();
