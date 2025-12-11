@@ -37,6 +37,11 @@ function keyPressed() {
   } else if (keyCode === LEFT_ARROW) {
     pv.stop();
   }
+  if (keyCode === RIGHT_ARROW) {
+    bell.stop();
+    bellTriggered = false;
+    crowd.stop();
+  }
 }
 
 function setAmbientVolume(v) {
@@ -106,7 +111,7 @@ function draw() {
     bell.play();
     bellTriggered = true;
   }
-  if (!pv.elt.paused && bell.isPlaying() || keyCode == RIGHT_ARROW) {
+  if (!pv.elt.paused && bell.isPlaying()) {
     bell.stop();
     bellTriggered = false;
   }
@@ -121,16 +126,17 @@ function draw() {
   }
 
   //crowd
-  let inCrowd1 = mouseX >= windowWidth * 316 / 1710 && mouseX <= windowWidth && mouseY >= height / 2 + 305 && mouseY <= height;
+  let inCrowd1 = mouseX >= windowWidth * 316 / 1710 && mouseX <= windowWidth - 400 && mouseY >= height / 2 + 305 && mouseY <= height;
   let inCrowd2 = mouseX >= windowWidth * 550 / 1710 && mouseX <= windowWidth * 1300 / 1710 && mouseY >= height / 2 - 190 && mouseY <= height / 2 - 145;
   let crowdShouldPlay = inCrowd1 || inCrowd2;
 
   if (crowdShouldPlay && !crowd.isPlaying()) {
     crowd.loop();
   }
-  if (!crowdShouldPlay && crowd.isPlaying() || keyCode == RIGHT_ARROW) {
+  if (!crowdShouldPlay && crowd.isPlaying()) {
     crowd.stop();
   }
+
 
   //nature
   let inNature1 = mouseX >= windowWidth * 20 / 1710 && mouseX <= windowWidth * 170 / 1710 && mouseY >= 420 && mouseY <= 630;
