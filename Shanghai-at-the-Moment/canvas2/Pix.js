@@ -65,23 +65,24 @@ class PixF {
     constructor(img, x, y) {
         this.img = img;
         this.pos = createVector(x, y);
-        this.pos.y = y;
-        this.size = 250;
+        this.imgH = random(180, 240);
+        this.imgW = (img.width / img.height) * this.imgH;
         this.remove = false;
     }
     update(mouthOpen, mouthPos) {
         if (mouthOpen && mouthPos) {
             //move to mouth
-            this.pos.lerp(mouthPos, 0.1);
+            this.pos.lerp(mouthPos, 0.05);
             //shrink
-            this.size *= 0.9;
+            this.imgH *= 0.97;
+            this.imgW = (this.img.width / this.img.height) * this.imgH;
             //disappear
-            if (this.size < 10) {
+            if (this.imgH < 40 || this.imgW < 60) {
                 this.remove = true;
             }
         }
     }
-    display(mouthOpen) {
-        image(this.img, this.pos.x, this.pos.y, this.size, this.size)
+    display() {
+        image(this.img, width - this.pos.x, this.pos.y, this.imgW, this.imgH)
     }
 }

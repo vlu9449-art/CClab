@@ -543,8 +543,10 @@ function drawFood() {
   if (mouthOpen) {
     let x = random(width);
     let y = random(height);
-    let idx = floor(random(fimg.length))
-    pix.push(new PixF(fimg[idx], x, y));
+    if (frameCount % 30 == 0) {
+      let idx = floor(random(fimg.length))
+      pix.push(new PixF(fimg[idx], x, y));
+    }
   }
   for (let i = pix.length - 1; i >= 0; i--) {
 
@@ -559,12 +561,12 @@ function drawFood() {
   fill(80, 180);
   stroke(230, 180);
   strokeWeight(0.5);
-  rect(width / 2, 60, 600, 40)
+  rect(width / 2, 60, 450, 40);
   textSize(24);
   fill(20, 220);
   stroke(255);
   strokeWeight(3);
-  text('Press SPACE and open your mouth!', width / 2, 60);
+  text('Open your mouth and see what happens!', width / 2, 60);
   drawBackButton();
 }
 
