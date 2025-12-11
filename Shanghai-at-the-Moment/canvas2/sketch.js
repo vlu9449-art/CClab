@@ -35,6 +35,7 @@ let prevWave = false;
 let fd;
 let faceMesh;
 let faces = [];
+let idx = 0;
 
 let options2 = { maxFaces: 1, refineLandmarks: false, flipped: false };
 
@@ -248,7 +249,7 @@ function drawIndexPage() {
 
   //add sound
   setAmbientVolume(0.6);
-  let view = mouseX < width / 3 && mouseY > windowHeight;
+  let view = mouseX < width / 3 && mouseY > height / 2;
   if (view && !birds.isPlaying() && !trees.isPlaying() && !bike.isPlaying() && !rings.isPlaying()) {
     birds.loop();
     trees.loop();
@@ -261,14 +262,14 @@ function drawIndexPage() {
     bike.stop();
     rings.stop();
   }
-  let ppl = mouseX > width / 3 && mouseX < 2 * width / 3 && mouseY > windowHeight;
+  let ppl = mouseX > width / 3 && mouseX < 2 * width / 3 && mouseY > height / 2;
   if (ppl && !crowd.isPlaying()) {
     crowd.play();
   }
   if (!ppl && crowd.isPlaying()) {
     crowd.stop();
   }
-  let food = mouseX > 2 * width / 3 && mouseY > windowHeight;
+  let food = mouseX > 2 * width / 3 && mouseY > height / 2;
   if (food && !stew.isPlaying()) {
     stew.play();
   }
@@ -520,15 +521,6 @@ function mouthInfo() {
   return { openness, center };
 }
 
-// function keyPressed() {
-//   if (keyCode === 32) {
-//     let x = random(width);
-//     let y = random(height);
-//     let idx = floor(random(fimg.length))
-//     pix.push(new PixF(fimg[idx], x, y));
-//   }
-// }
-
 
 function drawFood() {
   image(fd, width / 2, height / 2, windowWidth, windowHeight);
@@ -543,10 +535,14 @@ function drawFood() {
     let x = random(width);
     let y = random(height);
     if (frameCount % 30 == 0) {
-      let idx = floor(random(fimg.length))
       pix.push(new PixF(fimg[idx], x, y));
     }
+    idx++;
+    if (idx >= fimg.length) {
+      idx = 0;
+    }
   }
+
   for (let i = pix.length - 1; i >= 0; i--) {
 
     pix[i].update(mouthOpen, mouthPos);
