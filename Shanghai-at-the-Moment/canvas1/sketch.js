@@ -106,7 +106,6 @@ function draw() {
   if (inBellTower && !bell.isPlaying() && !bellTriggered) {
     bell.play();
     bellTriggered = true;
-
   }
   if (!pv.elt.paused && bell.isPlaying() && mouseY > height) {
     bell.stop();
@@ -117,6 +116,9 @@ function draw() {
     stroke(255, 255, 50, 100);
     strokeWeight(5);
     rect(windowWidth * 175 / 1710, 560, 130 * windowWidth / 1710, height - 560);
+    fill(0, 180);
+    stroke(255, 120);
+    text('Remember to scroll down to check more contents!', 50, 520);
   }
 
   //crowd
