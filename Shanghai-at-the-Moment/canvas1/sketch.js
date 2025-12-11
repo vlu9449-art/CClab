@@ -124,9 +124,13 @@ function draw() {
     stroke(255, 120);
     text('Remember to scroll down to check more contents!', 50, 520);
   }
+  if (bellTriggered) {
+    textSize(20);
+    text('Press RIGHT ARROW to stop the bell sound', 60, height - 30);
+  }
 
   //crowd
-  let inCrowd1 = mouseX >= windowWidth * 316 / 1710 && mouseX <= windowWidth - 400 && mouseY >= height / 2 + 305 && mouseY <= height;
+  let inCrowd1 = mouseX >= windowWidth * 316 / 1710 && mouseX <= windowWidth - 400 && mouseY >= height / 2 + 305 && mouseY <= height - 30;
   let inCrowd2 = mouseX >= windowWidth * 550 / 1710 && mouseX <= windowWidth * 1300 / 1710 && mouseY >= height / 2 - 190 && mouseY <= height / 2 - 145;
   let crowdShouldPlay = inCrowd1 || inCrowd2;
 

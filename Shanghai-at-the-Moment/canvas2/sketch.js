@@ -77,11 +77,11 @@ function preload() {
 }
 
 function setAmbientVolume(v) {
-  birds.setVolume(v - 0.2);
+  birds.setVolume(v);
   trees.setVolume(v + 0.3);
   rings.setVolume(v);
-  bike.setVolume(v - 0.2);
-  crowd.setVolume(v - 0.2);
+  bike.setVolume(v - 0.1);
+  crowd.setVolume(v - 0.3);
   stew.setVolume(v + 0.2);
 }
 
@@ -93,7 +93,6 @@ function setup() {
   imageMode(CENTER);
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
-  setAmbientVolume(0.3);
   setupIndex();
 }
 
@@ -262,14 +261,14 @@ function drawIndexPage() {
     bike.stop();
     rings.stop();
   }
-  let ppl = mouseX > width / 3 && mouseX < 2 * width / 3;
+  let ppl = mouseX > width / 3 && mouseX < 2 * width / 3 && mouseY > windowHeight;
   if (ppl && !crowd.isPlaying()) {
     crowd.play();
   }
   if (!ppl && crowd.isPlaying()) {
     crowd.stop();
   }
-  let food = mouseX > 2 * width / 3;
+  let food = mouseX > 2 * width / 3 && mouseY > windowHeight;
   if (food && !stew.isPlaying()) {
     stew.play();
   }
