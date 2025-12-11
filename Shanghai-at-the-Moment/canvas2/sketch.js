@@ -78,11 +78,11 @@ function preload() {
 
 function setAmbientVolume(v) {
   birds.setVolume(v - 0.2);
-  trees.setVolume(v + 0.5);
+  trees.setVolume(v + 0.3);
   rings.setVolume(v);
-  bike.setVolume(v - 0.4);
+  bike.setVolume(v - 0.2);
   crowd.setVolume(v - 0.2);
-  stew.setVolume(v + 0.4);
+  stew.setVolume(v + 0.2);
 }
 
 
@@ -93,7 +93,7 @@ function setup() {
   imageMode(CENTER);
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
-
+  setAmbientVolume(0.3);
   setupIndex();
 }
 
@@ -249,7 +249,7 @@ function drawIndexPage() {
 
   //add sound
   setAmbientVolume(0.6);
-  let view = mouseX < width / 3;
+  let view = mouseX < width / 3 && mouseY > windowHeight;
   if (view && !birds.isPlaying() && !trees.isPlaying() && !bike.isPlaying() && !rings.isPlaying()) {
     birds.loop();
     trees.loop();

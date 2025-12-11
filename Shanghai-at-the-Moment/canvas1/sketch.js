@@ -1,6 +1,5 @@
 let bg, pv;
-// let sounds = [];
-// let regions = [];
+
 let ship, wind, wave, bell, crowds, trees, rings, bike;
 let s = 30;
 let bellTriggered = false;
@@ -107,7 +106,7 @@ function draw() {
     bell.play();
     bellTriggered = true;
   }
-  if (!pv.elt.paused && bell.isPlaying() && mouseY > height) {
+  if (!pv.elt.paused && bell.isPlaying() || keyCode == RIGHT_ARROW) {
     bell.stop();
     bellTriggered = false;
   }
@@ -129,7 +128,7 @@ function draw() {
   if (crowdShouldPlay && !crowd.isPlaying()) {
     crowd.loop();
   }
-  if (!crowdShouldPlay && crowd.isPlaying() || mouseY > height) {
+  if (!crowdShouldPlay && crowd.isPlaying() || keyCode == RIGHT_ARROW) {
     crowd.stop();
   }
 
